@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qureo Solver Pro | الحل التلقائي لمنصة كيريو</title>
+    <!-- خط كايرو الاحترافي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #06090e;
+            --card-bg: rgba(16, 23, 34, 0.85);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.4);
+            --secondary: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.12) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 15px 0 5px;
+        }
+
+        .badge-24 {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--primary);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .dot-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 30%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat-pill {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-pill span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .stat-pill strong {
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 22px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .step-num {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            font-weight: 900;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .card-title h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .card-title p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .stepper {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .step-line {
+            height: 4px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .step-line.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .step-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+
+        .course-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1.5px solid var(--primary);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .course-info h3 {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .course-info span {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .course-icon {
+            background: var(--primary);
+            color: #06090e;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(6, 9, 14, 0.8);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.25s;
+            text-align: left;
+            direction: ltr;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .confirm-banner {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: #38bdf8;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-top: 14px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 13px;
+            border-radius: 14px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #059669);
+            color: #04130d;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            flex: 0.45;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .live-box {
+            background: rgba(6, 9, 14, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .live-box strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .live-box span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .terminal {
+            background: #030508;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 14px;
+            padding: 14px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #10b981;
+            direction: ltr;
+            text-align: left;
+            max-height: 160px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .terminal .log-info { color: #38bdf8; }
+        .terminal .log-wait { color: #94a3b8; }
+
+        .contact-card {
+            background: linear-gradient(145deg, rgba(16, 23, 34, 0.95), rgba(10, 15, 24, 0.95));
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 22px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+        }
+
+        .contact-title {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .devs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 440px) {
+            .devs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dev-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px;
+            text-align: center;
+            transition: 0.25s;
+        }
+
+        .dev-box:hover {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .dev-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            direction: ltr;
+        }
+
+        .dev-phone {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 5px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            direction: ltr;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .dev-phone:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .copy-toast {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-top: 10px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الهيدر -->
+        <div class="header">
+            <div class="badge-24">
+                <span class="dot-pulse"></span>
+                متاح ويعمل تلقائياً 24 ساعة
+            </div>
+            <h1>Qureo Solver Pro</h1>
+            <p>أسرع نظام لحل فصول منصة كيريو بضغطة زر ومن غير انتظار</p>
+        </div>
+
+        <!-- شريط المميزات -->
+        <div class="stats-bar">
+            <div class="stat-pill">
+                <span>حالة السيرفر</span>
+                <strong>شغال 24/7</strong>
+            </div>
+            <div class="stat-pill">
+                <span>نظام الدور</span>
+                <strong>طابور ذكي</strong>
+            </div>
+            <div class="stat-pill">
+                <span>المتابعة</span>
+                <strong>تقدم مباشر</strong>
+            </div>
+        </div>
+
+        <!-- كارت خطوات الحل -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>ابدأ حل جديد</h2>
+                    <p>أربع خطوات سريعة، والباقي علينا</p>
+                </div>
+                <div class="step-num" id="step-badge">01</div>
+            </div>
+
+            <!-- شريط التقدم -->
+            <div class="stepper">
+                <div class="step-line active" id="line-1"></div>
+                <div class="step-line" id="line-2"></div>
+                <div class="step-line" id="line-3"></div>
+                <div class="step-line" id="line-4"></div>
+            </div>
+
+            <!-- الخطوة 1: الكورس -->
+            <div class="step-content active" id="step-1">
+                <label>اختار الكورس المناسب لسنتك</label>
+                <div class="course-box">
+                    <div class="course-info">
+                        <h3>جافاسكربت (JavaScript)</h3>
+                        <span>42 فصل • الصف الأول الثانوي</span>
+                    </div>
+                    <div class="course-icon">JS</div>
+                </div>
+                <p class="hint">تم ضبط الكورس تلقائياً لمنهج أولى ثانوي.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="goToStep(2)">التالي ←</button>
+                </div>
+            </div>
+
+            <!-- الخطوة 2: رقم الموبايل -->
+            <div class="step-content" id="step-2">
+                <label>رقم الموبايل</label>
+                <input type="tel" id="phoneInput" placeholder="01xxxxxxxxx" maxlength="11">
+                <p class="hint">بنستخدمه بس لو احتجنا نتواصل معاك بخصوص جلستك.</p>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="goToStep(1)">رجوع</button>
+                    <button class="btn btn-primary" onclick="goToStep(3)">التالي ←</button>
+                </div>
+            </div>
+
+            <!-- الخطوة 3: كود الطالب -->
+            <div class="step-content" id="step-3">
+                <label>كود الطالب</label>
+                <input type="text" id="codeInput" placeholder="اكتب كود الطالب هنا">
+                <p class="hint">كود الطالب المخصص لحسابك على منصة كيريو.</p>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="goToStep(2)">رجوع</button>
+                    <button class="btn btn-primary" onclick="goToStep(4)">التالي ←</button>
+                </div>
+            </div>
+
+            <!-- الخطوة 4: كلمة السر -->
+            <div class="step-content" id="step-4">
+                <label>كلمة السر</label>
+                <input type="password" id="passInput" placeholder="••••••••">
+                <p class="hint">بياناتك بتستخدم فقط لإكمال الكورس ومش بتتحفظ عند أي طرف.</p>
+                <div class="confirm-banner">
+                    تأكيد أخير — هتحل: JavaScript • أولى ثانوي
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="goToStep(3)">رجوع</button>
+                    <button class="btn btn-primary" onclick="startSolving()">ابدأ الحل 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- كارت التقدم المباشر -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>التقدم المباشر</h2>
+                    <p>تحديثات حية من جلستك الحالية</p>
+                </div>
+                <div class="step-num" style="background: rgba(16,185,129,0.2); color: var(--primary);">02</div>
+            </div>
+
+            <div class="live-grid">
+                <div class="live-box">
+                    <strong id="statusText" style="color: var(--text-muted);">في الانتظار</strong>
+                    <span>حالة الحل</span>
+                </div>
+                <div class="live-box">
+                    <strong id="lastChapter">--</strong>
+                    <span>آخر فصل</span>
+                </div>
+                <div class="live-box">
+                    <strong id="completedCount">0 / 42</strong>
+                    <span>فصول مكتملة</span>
+                </div>
+            </div>
+
+            <div class="terminal" id="terminalLog">
+                <div class="log-wait">> System ready. Waiting for user credentials...</div>
+            </div>
+        </div>
+
+        <!-- مربع التواصل -->
+        <div class="contact-card">
+            <div class="contact-title">
+                <span>📞</span> للتواصل معنا
+            </div>
+            <div class="devs-grid">
+                <div class="dev-box">
+                    <div class="dev-name">Abdelrahman Hatem</div>
+                    <div class="dev-phone" onclick="copyNumber('01557391031')" title="اضغط لنسخ الرقم">01557391031</div>
+                </div>
+                <div class="dev-box">
+                    <div class="dev-name">Medhat Abdulbaqi</div>
+                    <div class="dev-phone" onclick="copyNumber('01060761957')" title="اضغط لنسخ الرقم">01060761957</div>
+                </div>
+            </div>
+            <div class="copy-toast" id="copyToast">اضغط على أي رقم لنسخه فوراً</div>
+        </div>
+    </div>
+
+    <script>
+        function goToStep(step) {
+            if (step === 3 && document.getElementById('phoneInput').value.trim().length < 10) {
+                alert('من فضلك اكتب رقم موبايل صحيح الأول');
+                return;
+            }
+            if (step === 4 && document.getElementById('codeInput').value.trim() === '') {
+                alert('من فضلك اكتب كود الطالب الأول');
+                return;
+            }
+
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+
+            document.getElementById('step-badge').innerText = '0' + step;
+            for (let i = 1; i <= 4; i++) {
+                const line = document.getElementById('line-' + i);
+                if (i <= step) line.classList.add('active');
+                else line.classList.remove('active');
+            }
+        }
+
+        function startSolving() {
+            const code = document.getElementById('codeInput').value.trim();
+            const pass = document.getElementById('passInput').value.trim();
+
+            if (pass === '') {
+                alert('اكتب كلمة السر عشان نبدأ الحل!');
+                return;
+            }
+
+            const statusEl = document.getElementById('statusText');
+            const terminal = document.getElementById('terminalLog');
+            
+            statusEl.innerText = 'يعمل الآن';
+            statusEl.style.color = '#10b981';
+
+            terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
+
+            let currentChapter = 90001;
+            let completed = 0;
+
+            const interval = setInterval(() => {
+                completed++;
+                document.getElementById('lastChapter').innerText = currentChapter;
+                document.getElementById('completedCount').innerText = `${completed} / 42`;
+                terminal.innerHTML += `<div>> Chapter ${currentChapter}: solving & syncing... Done!</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                currentChapter++;
+
+                if (completed >= 42) {
+                    clearInterval(interval);
+                    statusEl.innerText = 'مكتمل بنجاح ✓';
+                    terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            }, 300);
+        }
+
+        function copyNumber(num) {
+            navigator.clipboard.writeText(num);
+            const toast = document.getElementById('copyToast');
+            toast.innerText = 'تم نسخ الرقم: ' + num + ' ✓';
+            setTimeout(() => {
+                toast.innerText = 'اضغط على أي رقم لنسخه فوراً';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
