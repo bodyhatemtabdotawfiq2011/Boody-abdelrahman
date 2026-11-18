@@ -634,13 +634,53 @@
             color: var(--primary);
             direction: ltr;
             text-align: left;
-            max-height: 160px;
+            max-height: 140px;
             overflow-y: auto;
             line-height: 1.6;
+            margin-bottom: 12px;
         }
 
         .terminal .log-info { color: var(--secondary); }
         .terminal .log-wait { color: var(--text-muted); }
+
+        /* ستايل كارت لعبة التسلية وقت الانتظار */
+        .mini-game-box {
+            background: rgba(2, 6, 4, 0.85);
+            border: 1px solid var(--primary);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            display: none; /* تظهر فقط لما الحل يبدأ */
+        }
+
+        .mini-game-box h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .game-click-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #020604;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: 0.15s;
+        }
+
+        .game-click-btn:active {
+            transform: scale(0.95);
+        }
+
+        .game-score {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
 
         .contact-card {
             background: var(--card-bg);
@@ -927,9 +967,16 @@
             <div class="terminal" id="terminalLog">
                 <div class="log-wait">> System ready. Waiting for user credentials...</div>
             </div>
+
+            <!-- لعبة التسلية المصغرة وقت الانتظار -->
+            <div class="mini-game-box" id="miniGameBox">
+                <h4>🎮 العب لحد ما السيرفر يخلص!</h4>
+                <button class="game-click-btn" onclick="increaseScore()">اضغط هنا بسرعة ⚡</button>
+                <div class="game-score">النقاط: <span id="gameScoreVal">0</span> نقطة</div>
+            </div>
         </div>
 
-        <!-- كارت التواصل (بدون صورة ثانية) -->
+        <!-- كارت التواصل -->
         <div class="contact-card">
             <div class="contact-title">
                 <span>📞</span> للتواصل معنا
@@ -1004,6 +1051,13 @@
             }
         }
 
+        // كود لعبة التسلية
+        let clickScore = 0;
+        function increaseScore() {
+            clickScore++;
+            document.getElementById('gameScoreVal').innerText = clickScore;
+        }
+
         function startSolving() {
             const code = document.getElementById('codeInput').value.trim();
             const pass = document.getElementById('passInput').value.trim();
@@ -1020,6 +1074,9 @@
             statusEl.style.color = 'var(--primary)';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
+
+            // إظهار لعبة التسلية فور بدء العملية
+            document.getElementById('miniGameBox').style.display = 'block';
 
             let currentChapter = 90001;
             let completed = 0;
@@ -1038,6 +1095,9 @@
                     statusEl.innerText = 'مكتمل بنجاح ✓';
                     terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
                     terminal.scrollTop = terminal.scrollHeight;
+                    
+                    // إخفاء اللعبة وإظهار رسالة مبروك بالنقاط
+                    document.getElementById('miniGameBox').innerHTML = `<h4>🎉 مبروك تم الانتهاء! جمعت ${clickScore} نقطة أثناء الانتظار ⚡</h4>`;
                 }
             }, 300);
         }
