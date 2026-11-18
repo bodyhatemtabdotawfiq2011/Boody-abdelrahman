@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #030a17;
-            --card-bg: rgba(11, 25, 46, 0.85);
-            --primary: #0284c7;
-            --primary-glow: rgba(2, 132, 199, 0.4);
-            --secondary: #38bdf8;
-            --text-main: #f0f9ff;
-            --text-muted: #7dd3fc;
-            --border-color: rgba(56, 189, 248, 0.15);
+            --bg-dark: #070614;
+            --card-bg: rgba(20, 18, 38, 0.85);
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --secondary: #06b6d4;
+            --text-main: #f3e8ff;
+            --text-muted: #a78bfa;
+            --border-color: rgba(139, 92, 246, 0.2);
         }
 
         * {
@@ -27,8 +27,8 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.15) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -54,9 +54,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(2, 132, 199, 0.15);
-            border: 1px solid rgba(2, 132, 199, 0.3);
-            color: var(--secondary);
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            color: var(--text-muted);
             padding: 5px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
@@ -69,7 +69,7 @@
             height: 8px;
             background-color: var(--secondary);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
             animation: pulse 1.5s infinite;
         }
 
@@ -82,7 +82,7 @@
         .header h1 {
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+            background: linear-gradient(135deg, #ffffff 20%, var(--primary) 60%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -125,7 +125,7 @@
             border-radius: 22px;
             padding: 22px;
             backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .card-header {
@@ -137,7 +137,7 @@
 
         .step-num {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #030a17;
+            color: #070614;
             font-weight: 900;
             width: 32px;
             height: 32px;
@@ -167,7 +167,7 @@
         .step-line {
             height: 4px;
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 4px;
             transition: 0.3s;
         }
@@ -196,11 +196,11 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #e0f2fe;
+            color: #f3e8ff;
         }
 
         .course-box {
-            background: rgba(2, 132, 199, 0.1);
+            background: rgba(139, 92, 246, 0.08);
             border: 1.5px solid var(--primary);
             border-radius: 14px;
             padding: 14px 16px;
@@ -221,7 +221,7 @@
         }
 
         .course-icon {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #fff;
             width: 38px;
             height: 38px;
@@ -235,7 +235,7 @@
 
         input {
             width: 100%;
-            background: rgba(3, 10, 23, 0.9);
+            background: rgba(7, 6, 20, 0.9);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 16px;
@@ -249,7 +249,7 @@
 
         input:focus {
             border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
         }
 
         .hint {
@@ -259,8 +259,8 @@
         }
 
         .confirm-banner {
-            background: rgba(2, 132, 199, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
             color: var(--secondary);
             padding: 10px 14px;
             border-radius: 12px;
@@ -289,13 +289,13 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #030a17;
-            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+            color: #070614;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 12px 25px rgba(6, 182, 212, 0.45);
         }
 
         .btn-secondary {
@@ -317,7 +317,7 @@
         }
 
         .live-box {
-            background: rgba(3, 10, 23, 0.7);
+            background: rgba(7, 6, 20, 0.7);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 8px;
@@ -337,8 +337,8 @@
         }
 
         .terminal {
-            background: #01040a;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: #03020a;
+            border: 1px solid rgba(139, 92, 246, 0.3);
             border-radius: 14px;
             padding: 14px;
             font-family: monospace;
@@ -351,12 +351,12 @@
             line-height: 1.6;
         }
 
-        .terminal .log-info { color: #7dd3fc; }
+        .terminal .log-info { color: #c084fc; }
         .terminal .log-wait { color: #38bdf8; }
 
         .contact-card {
-            background: linear-gradient(145deg, rgba(11, 25, 46, 0.95), rgba(5, 14, 28, 0.95));
-            border: 1px solid rgba(2, 132, 199, 0.4);
+            background: linear-gradient(145deg, rgba(20, 18, 38, 0.95), rgba(10, 9, 20, 0.95));
+            border: 1px solid rgba(139, 92, 246, 0.4);
             border-radius: 22px;
             padding: 20px;
             position: relative;
@@ -408,7 +408,7 @@
 
         .dev-box:hover {
             border-color: var(--secondary);
-            background: rgba(2, 132, 199, 0.08);
+            background: rgba(139, 92, 246, 0.08);
             transform: translateY(-2px);
         }
 
@@ -422,7 +422,7 @@
 
         .dev-phone {
             display: inline-block;
-            background: rgba(2, 132, 199, 0.15);
+            background: rgba(139, 92, 246, 0.15);
             color: var(--secondary);
             font-weight: 700;
             font-size: 0.9rem;
@@ -432,12 +432,12 @@
             direction: ltr;
             letter-spacing: 0.5px;
             cursor: pointer;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
         .dev-phone:hover {
             background: var(--secondary);
-            color: #030a17;
+            color: #070614;
         }
 
         .copy-toast {
@@ -547,7 +547,7 @@
                     <h2>التقدم المباشر</h2>
                     <p>تحديثات حية من جلستك الحالية</p>
                 </div>
-                <div class="step-num" style="background: rgba(56,189,248,0.2); color: var(--secondary);">02</div>
+                <div class="step-num" style="background: rgba(6,182,212,0.2); color: var(--secondary);">02</div>
             </div>
 
             <div class="live-grid">
@@ -639,7 +639,7 @@
             const terminal = document.getElementById('terminalLog');
             
             statusEl.innerText = 'يعمل الآن';
-            statusEl.style.color = '#38bdf8';
+            statusEl.style.color = '#06b6d4';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
 
