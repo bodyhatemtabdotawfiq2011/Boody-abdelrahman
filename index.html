@@ -701,17 +701,7 @@
             transform: translateY(-2px);
         }
 
-        .dev-avatar {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary);
-            margin-bottom: 8px;
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .devs-grid .dev-box:nth-child(2) .dev-avatar-ph {
+        .dev-avatar-ph {
             width: 65px;
             height: 65px;
             border-radius: 50%;
@@ -722,7 +712,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,255,135,0.1);
+            background: var(--primary-glow);
             color: var(--primary);
             font-weight: bold;
             font-size: 1.2rem;
@@ -759,7 +749,6 @@
         }
 
         .copy-toast {
-            text-align: context;
             text-align: center;
             font-size: 0.75rem;
             color: var(--primary);
@@ -940,14 +929,14 @@
             </div>
         </div>
 
-        <!-- كارت التواصل (صورتك dev-pic.jpg) -->
+        <!-- كارت التواصل (بدون صورة ثانية) -->
         <div class="contact-card">
             <div class="contact-title">
                 <span>📞</span> للتواصل معنا
             </div>
             <div class="devs-grid">
                 <div class="dev-box">
-                    <img src="dev-pic.jpg" alt="Abdelrahman Hatem" class="dev-avatar">
+                    <div class="dev-avatar-ph">AH</div>
                     <div class="dev-name">Abdelrahman Hatem</div>
                     <div class="dev-phone" onclick="copyNumber('01557391031')" title="اضغط لنسخ الرقم">01557391031</div>
                 </div>
@@ -962,7 +951,6 @@
     </div>
 
     <script>
-        // إظهار وإخفاء نافذة المساعدة (FAQ Modal)
         function toggleFaq() {
             const modal = document.getElementById('faqModal');
             if (modal.style.display === 'flex') {
@@ -972,7 +960,6 @@
             }
         }
 
-        // مصفوفة الثيمات الـ 7 العصرية
         const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
         const themeNames = ['Emerald 🟢', 'Electric Cyan 🔵', 'Cyber Purple 🟣', 'Deep Ocean 💧', 'Solar Gold 🟡', 'Matrix Red 🔴'];
         let currentThemeIndex = 0;
