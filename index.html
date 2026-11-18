@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #070614;
-            --card-bg: rgba(20, 18, 38, 0.85);
-            --primary: #8b5cf6;
-            --primary-glow: rgba(139, 92, 246, 0.4);
-            --secondary: #06b6d4;
-            --text-main: #f3e8ff;
-            --text-muted: #a78bfa;
-            --border-color: rgba(139, 92, 246, 0.2);
+            --bg-dark: #020604;
+            --card-bg: rgba(10, 20, 15, 0.75);
+            --primary: #00ff87;
+            --primary-glow: rgba(0, 255, 135, 0.35);
+            --secondary: #60efff;
+            --text-main: #f0fdf4;
+            --text-muted: #86efac;
+            --border-color: rgba(0, 255, 135, 0.2);
         }
 
         * {
@@ -27,8 +27,8 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 45%),
-                radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.15) 0%, transparent 45%);
+                radial-gradient(circle at 15% 10%, rgba(0, 255, 135, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(96, 239, 255, 0.1) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -63,7 +63,7 @@
             padding: 35px 25px;
             max-width: 420px;
             width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 135, 0.1);
             backdrop-filter: blur(20px);
             animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -108,17 +108,17 @@
             border-radius: 16px;
             border: none;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #070614;
+            color: #020604;
             font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 255, 135, 0.3);
             transition: 0.3s;
         }
 
         .enter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.5);
+            box-shadow: 0 15px 30px rgba(96, 239, 255, 0.4);
         }
 
         /* المحتوى الأساسي للموقع */
@@ -139,9 +139,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.35);
-            color: var(--text-muted);
+            background: rgba(0, 255, 135, 0.1);
+            border: 1px solid rgba(0, 255, 135, 0.3);
+            color: var(--primary);
             padding: 5px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
@@ -152,9 +152,9 @@
         .dot-pulse {
             width: 8px;
             height: 8px;
-            background-color: var(--secondary);
+            background-color: var(--primary);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--secondary);
+            box-shadow: 0 0 10px var(--primary);
             animation: pulse 1.5s infinite;
         }
 
@@ -201,7 +201,7 @@
 
         .stat-pill strong {
             font-size: 0.95rem;
-            color: var(--secondary);
+            color: var(--primary);
         }
 
         .card {
@@ -222,7 +222,7 @@
 
         .step-num {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #070614;
+            color: #020604;
             font-weight: 900;
             width: 32px;
             height: 32px;
@@ -281,11 +281,11 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #f3e8ff;
+            color: #f0fdf4;
         }
 
         .course-box {
-            background: rgba(139, 92, 246, 0.08);
+            background: rgba(0, 255, 135, 0.06);
             border: 1.5px solid var(--primary);
             border-radius: 14px;
             padding: 14px 16px;
@@ -302,12 +302,12 @@
 
         .course-info span {
             font-size: 0.8rem;
-            color: var(--secondary);
+            color: var(--primary);
         }
 
         .course-icon {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
+            color: #020604;
             width: 38px;
             height: 38px;
             border-radius: 10px;
@@ -320,7 +320,7 @@
 
         input {
             width: 100%;
-            background: rgba(7, 6, 20, 0.9);
+            background: rgba(2, 6, 4, 0.9);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 16px;
@@ -333,8 +333,8 @@
         }
 
         input:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.2);
         }
 
         .hint {
@@ -344,9 +344,9 @@
         }
 
         .confirm-banner {
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--secondary);
+            background: rgba(0, 255, 135, 0.1);
+            border: 1px solid rgba(0, 255, 135, 0.3);
+            color: var(--primary);
             padding: 10px 14px;
             border-radius: 12px;
             font-size: 0.85rem;
@@ -374,13 +374,13 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #070614;
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+            color: #020604;
+            box-shadow: 0 8px 20px rgba(0, 255, 135, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(6, 182, 212, 0.45);
+            box-shadow: 0 12px 25px rgba(96, 239, 255, 0.4);
         }
 
         .btn-secondary {
@@ -402,7 +402,7 @@
         }
 
         .live-box {
-            background: rgba(7, 6, 20, 0.7);
+            background: rgba(2, 6, 4, 0.7);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 8px;
@@ -422,13 +422,13 @@
         }
 
         .terminal {
-            background: #03020a;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: #010302;
+            border: 1px solid rgba(0, 255, 135, 0.25);
             border-radius: 14px;
             padding: 14px;
             font-family: monospace;
             font-size: 0.8rem;
-            color: var(--secondary);
+            color: var(--primary);
             direction: ltr;
             text-align: left;
             max-height: 160px;
@@ -436,12 +436,12 @@
             line-height: 1.6;
         }
 
-        .terminal .log-info { color: #c084fc; }
-        .terminal .log-wait { color: #38bdf8; }
+        .terminal .log-info { color: var(--secondary); }
+        .terminal .log-wait { color: var(--text-muted); }
 
         .contact-card {
-            background: linear-gradient(145deg, rgba(20, 18, 38, 0.95), rgba(10, 9, 20, 0.95));
-            border: 1px solid rgba(139, 92, 246, 0.4);
+            background: linear-gradient(145deg, rgba(10, 20, 15, 0.95), rgba(4, 10, 7, 0.95));
+            border: 1px solid rgba(0, 255, 135, 0.35);
             border-radius: 22px;
             padding: 20px;
             position: relative;
@@ -492,8 +492,8 @@
         }
 
         .dev-box:hover {
-            border-color: var(--secondary);
-            background: rgba(139, 92, 246, 0.08);
+            border-color: var(--primary);
+            background: rgba(0, 255, 135, 0.06);
             transform: translateY(-2px);
         }
 
@@ -507,8 +507,8 @@
 
         .dev-phone {
             display: inline-block;
-            background: rgba(139, 92, 246, 0.15);
-            color: var(--secondary);
+            background: rgba(0, 255, 135, 0.1);
+            color: var(--primary);
             font-weight: 700;
             font-size: 0.9rem;
             padding: 5px 12px;
@@ -517,18 +517,18 @@
             direction: ltr;
             letter-spacing: 0.5px;
             cursor: pointer;
-            border: 1px solid rgba(6, 182, 212, 0.3);
+            border: 1px solid rgba(0, 255, 135, 0.25);
         }
 
         .dev-phone:hover {
-            background: var(--secondary);
-            color: #070614;
+            background: var(--primary);
+            color: #020604;
         }
 
         .copy-toast {
             text-align: center;
             font-size: 0.75rem;
-            color: var(--secondary);
+            color: var(--primary);
             margin-top: 10px;
             height: 16px;
         }
@@ -539,7 +539,7 @@
     <!-- واجهة الترحيب الأولى -->
     <div id="welcomeScreen">
         <div class="welcome-card">
-            <div class="welcome-icon">👋</div>
+            <div class="welcome-icon">✨</div>
             <h2>مرحباً بكم في موقعنا</h2>
             <p>نتمنى لكم تجربة ممتعة وسريعة مع نظام الحل التلقائي لفصول منصة كيريو.</p>
             <button class="enter-btn" onclick="enterApp()">دخول للموقع 🚀</button>
@@ -643,7 +643,7 @@
                     <h2>التقدم المباشر</h2>
                     <p>تحديثات حية من جلستك الحالية</p>
                 </div>
-                <div class="step-num" style="background: rgba(6,182,212,0.2); color: var(--secondary);">02</div>
+                <div class="step-num" style="background: rgba(0,255,135,0.2); color: var(--primary);">02</div>
             </div>
 
             <div class="live-grid">
@@ -685,7 +685,6 @@
     </div>
 
     <script>
-        // دالة الدخول من شاشة الترحيب
         function enterApp() {
             const welcome = document.getElementById('welcomeScreen');
             welcome.style.opacity = '0';
@@ -742,7 +741,7 @@
             const terminal = document.getElementById('terminalLog');
             
             statusEl.innerText = 'يعمل الآن';
-            statusEl.style.color = '#06b6d4';
+            statusEl.style.color = '#00ff87';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
 
