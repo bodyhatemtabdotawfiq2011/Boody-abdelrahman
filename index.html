@@ -18,7 +18,7 @@
             --border-color: rgba(0, 255, 135, 0.2);
         }
 
-        /* 2. الثيم الثاني: الأزرق السماوي اللي قبله (Electric Cyan) */
+        /* 2. الثيم الثاني: الأزرق السماوي (Electric Cyan) */
         [data-theme="cyan"] {
             --bg-dark: #02060b;
             --card-bg: rgba(10, 18, 30, 0.75);
@@ -99,22 +99,47 @@
             padding: 20px 15px;
         }
 
-        .theme-switcher-bar {
+        /* بار التحكم العلوي (الثيمات + دليل الاستخدام) */
+        .top-control-bar {
             width: 100%;
             max-width: 520px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
             margin-bottom: 12px;
+        }
+
+        .theme-switcher-bar, .faq-trigger-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 8px 14px;
             border-radius: 14px;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .theme-switcher-bar {
+            flex: 1.3;
+        }
+
+        .faq-trigger-btn {
+            flex: 0.9;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .faq-trigger-btn:hover {
+            background: var(--primary-glow);
         }
 
         .theme-switcher-bar span {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
             font-weight: 700;
         }
@@ -123,9 +148,9 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #020604;
             border: none;
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 9px;
+            font-size: 0.75rem;
             font-weight: 900;
             cursor: pointer;
             box-shadow: 0 4px 12px var(--primary-glow);
@@ -136,6 +161,90 @@
             transform: scale(1.05);
         }
 
+        /* نافذة المساعدة / الأسئلة الشائعة (FAQ Modal) */
+        #faqModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 4, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .faq-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--primary);
+            border-radius: 24px;
+            padding: 25px;
+            max-width: 450px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px var(--primary-glow);
+            animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .faq-header h3 {
+            font-size: 1.15rem;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .close-faq {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .close-faq:hover {
+            background: var(--primary);
+            color: #020604;
+        }
+
+        .faq-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            text-align: right;
+        }
+
+        .faq-item h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .faq-item p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* واجهة الترحيب الأولى (صورتك my-pic.jpg) */
         #welcomeScreen {
             position: fixed;
             top: 0;
@@ -602,6 +711,25 @@
             box-shadow: 0 0 15px var(--primary-glow);
         }
 
+        .devs-grid .dev-box:nth-child(2) .dev-avatar-ph {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            margin-bottom: 8px;
+            box-shadow: 0 0 15px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,255,135,0.1);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .dev-name {
             font-size: 0.95rem;
             font-weight: 700;
@@ -631,6 +759,7 @@
         }
 
         .copy-toast {
+            text-align: context;
             text-align: center;
             font-size: 0.75rem;
             color: var(--primary);
@@ -640,6 +769,34 @@
     </style>
 </head>
 <body>
+
+    <!-- نافذة المساعدة / الأسئلة الشائعة (FAQ Modal) -->
+    <div id="faqModal">
+        <div class="faq-card">
+            <div class="faq-header">
+                <h3>❓ دليل الاستخدام والأسئلة الشائعة</h3>
+                <button class="close-faq" onclick="toggleFaq()">✕</button>
+            </div>
+            <div class="faq-body">
+                <div class="faq-item">
+                    <h4>1. ما هو نظام Qureo Solver Pro؟</h4>
+                    <p>هو نظام مخصص لتسهيل إنجاز وحل فصول منصة كيريو التعليمية للمرحلة الثانوية بشكل ذكي وسريع.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>2. من أين أحصل على كود الطالب وكلمة المرور؟</h4>
+                    <p>تستخدم البيانات الرسمية الخاصة بحسابك المسجل به مسبقاً على منصة كيريو التعليمية.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>3. هل بياناتي وحسابي آمنون؟</h4>
+                    <p>نعم بالكامل! بياناتك تُستخدم لحظياً لإتمام الجلسة فقط ولا يتم تخزينها أو حفظها نهائياً لدى أي طرف.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>4. كيف أقوم بتغيير ألوان الثيم؟</h4>
+                    <p>يمكنك الضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 7 ميكسات ألوان عصرية تناسب ذوقك.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- واجهة الترحيب الأولى (صورتك my-pic.jpg) -->
     <div id="welcomeScreen">
@@ -654,10 +811,15 @@
     <!-- المحتوى الأساسي للموقع -->
     <div class="container">
         
-        <!-- بار تبديل الثيمات الـ 7 -->
-        <div class="theme-switcher-bar">
-            <span>🎨 اختر ثيم الألوان المفضل</span>
-            <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald 🟢</button>
+        <!-- بار التحكم العلوي: الثيمات + زرار الدليل -->
+        <div class="top-control-bar">
+            <div class="theme-switcher-bar">
+                <span>🎨 الثيم</span>
+                <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald 🟢</button>
+            </div>
+            <div class="faq-trigger-btn" onclick="toggleFaq()">
+                <span>💡 دليل الاستخدام</span>
+            </div>
         </div>
 
         <div class="header">
@@ -790,6 +952,7 @@
                     <div class="dev-phone" onclick="copyNumber('01557391031')" title="اضغط لنسخ الرقم">01557391031</div>
                 </div>
                 <div class="dev-box">
+                    <div class="dev-avatar-ph">MA</div>
                     <div class="dev-name">Medhat Abdulbaqi</div>
                     <div class="dev-phone" onclick="copyNumber('01060761957')" title="اضغط لنسخ الرقم">01060761957</div>
                 </div>
@@ -799,7 +962,17 @@
     </div>
 
     <script>
-        // مصفوفة الثيمات الـ 7 العصرية (شاملة الحالي والأزرق القديم)
+        // إظهار وإخفاء نافذة المساعدة (FAQ Modal)
+        function toggleFaq() {
+            const modal = document.getElementById('faqModal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'flex';
+            }
+        }
+
+        // مصفوفة الثيمات الـ 7 العصرية
         const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
         const themeNames = ['Emerald 🟢', 'Electric Cyan 🔵', 'Cyber Purple 🟣', 'Deep Ocean 💧', 'Solar Gold 🟡', 'Matrix Red 🔴'];
         let currentThemeIndex = 0;
