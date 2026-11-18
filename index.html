@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #06090e;
-            --card-bg: rgba(16, 23, 34, 0.85);
-            --primary: #10b981;
-            --primary-glow: rgba(16, 185, 129, 0.4);
-            --secondary: #0ea5e9;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg-dark: #030a17;
+            --card-bg: rgba(11, 25, 46, 0.85);
+            --primary: #0284c7;
+            --primary-glow: rgba(2, 132, 199, 0.4);
+            --secondary: #38bdf8;
+            --text-main: #f0f9ff;
+            --text-muted: #7dd3fc;
+            --border-color: rgba(56, 189, 248, 0.15);
         }
 
         * {
@@ -27,8 +27,8 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.12) 0%, transparent 40%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -54,9 +54,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--primary);
+            background: rgba(2, 132, 199, 0.15);
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            color: var(--secondary);
             padding: 5px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
@@ -67,9 +67,9 @@
         .dot-pulse {
             width: 8px;
             height: 8px;
-            background-color: var(--primary);
+            background-color: var(--secondary);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--primary);
+            box-shadow: 0 0 8px var(--secondary);
             animation: pulse 1.5s infinite;
         }
 
@@ -82,7 +82,7 @@
         .header h1 {
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 30%, #10b981 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -116,7 +116,7 @@
 
         .stat-pill strong {
             font-size: 0.95rem;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .card {
@@ -125,7 +125,7 @@
             border-radius: 22px;
             padding: 22px;
             backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .card-header {
@@ -137,7 +137,7 @@
 
         .step-num {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000;
+            color: #030a17;
             font-weight: 900;
             width: 32px;
             height: 32px;
@@ -196,11 +196,11 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #e2e8f0;
+            color: #e0f2fe;
         }
 
         .course-box {
-            background: rgba(16, 185, 129, 0.08);
+            background: rgba(2, 132, 199, 0.1);
             border: 1.5px solid var(--primary);
             border-radius: 14px;
             padding: 14px 16px;
@@ -217,12 +217,12 @@
 
         .course-info span {
             font-size: 0.8rem;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .course-icon {
             background: var(--primary);
-            color: #06090e;
+            color: #fff;
             width: 38px;
             height: 38px;
             border-radius: 10px;
@@ -235,7 +235,7 @@
 
         input {
             width: 100%;
-            background: rgba(6, 9, 14, 0.8);
+            background: rgba(3, 10, 23, 0.9);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 16px;
@@ -248,8 +248,8 @@
         }
 
         input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
         }
 
         .hint {
@@ -259,9 +259,9 @@
         }
 
         .confirm-banner {
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            color: #38bdf8;
+            background: rgba(2, 132, 199, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--secondary);
             padding: 10px 14px;
             border-radius: 12px;
             font-size: 0.85rem;
@@ -288,25 +288,25 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #059669);
-            color: #04130d;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #030a17;
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.45);
+            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.5);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--border-color);
             flex: 0.45;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .live-grid {
@@ -317,7 +317,7 @@
         }
 
         .live-box {
-            background: rgba(6, 9, 14, 0.7);
+            background: rgba(3, 10, 23, 0.7);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 8px;
@@ -337,13 +337,13 @@
         }
 
         .terminal {
-            background: #030508;
-            border: 1px solid rgba(16, 185, 129, 0.25);
+            background: #01040a;
+            border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 14px;
             padding: 14px;
             font-family: monospace;
             font-size: 0.8rem;
-            color: #10b981;
+            color: var(--secondary);
             direction: ltr;
             text-align: left;
             max-height: 160px;
@@ -351,12 +351,12 @@
             line-height: 1.6;
         }
 
-        .terminal .log-info { color: #38bdf8; }
-        .terminal .log-wait { color: #94a3b8; }
+        .terminal .log-info { color: #7dd3fc; }
+        .terminal .log-wait { color: #38bdf8; }
 
         .contact-card {
-            background: linear-gradient(145deg, rgba(16, 23, 34, 0.95), rgba(10, 15, 24, 0.95));
-            border: 1px solid rgba(16, 185, 129, 0.35);
+            background: linear-gradient(145deg, rgba(11, 25, 46, 0.95), rgba(5, 14, 28, 0.95));
+            border: 1px solid rgba(2, 132, 199, 0.4);
             border-radius: 22px;
             padding: 20px;
             position: relative;
@@ -398,7 +398,7 @@
         }
 
         .dev-box {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 14px;
@@ -407,8 +407,8 @@
         }
 
         .dev-box:hover {
-            border-color: var(--primary);
-            background: rgba(16, 185, 129, 0.05);
+            border-color: var(--secondary);
+            background: rgba(2, 132, 199, 0.08);
             transform: translateY(-2px);
         }
 
@@ -422,8 +422,8 @@
 
         .dev-phone {
             display: inline-block;
-            background: rgba(16, 185, 129, 0.12);
-            color: var(--primary);
+            background: rgba(2, 132, 199, 0.15);
+            color: var(--secondary);
             font-weight: 700;
             font-size: 0.9rem;
             padding: 5px 12px;
@@ -432,18 +432,18 @@
             direction: ltr;
             letter-spacing: 0.5px;
             cursor: pointer;
-            border: 1px solid rgba(16, 185, 129, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         .dev-phone:hover {
-            background: var(--primary);
-            color: #000;
+            background: var(--secondary);
+            color: #030a17;
         }
 
         .copy-toast {
             text-align: center;
             font-size: 0.75rem;
-            color: var(--primary);
+            color: var(--secondary);
             margin-top: 10px;
             height: 16px;
         }
@@ -547,7 +547,7 @@
                     <h2>التقدم المباشر</h2>
                     <p>تحديثات حية من جلستك الحالية</p>
                 </div>
-                <div class="step-num" style="background: rgba(16,185,129,0.2); color: var(--primary);">02</div>
+                <div class="step-num" style="background: rgba(56,189,248,0.2); color: var(--secondary);">02</div>
             </div>
 
             <div class="live-grid">
@@ -610,7 +610,6 @@
             }
         }
 
-        // دالة سحب البيانات عبر وسيط مخصص لتجاوز حظر المتصفح
         async function fetchQureoDataViaProxy() {
             const targetUrl = 'https://me-tp.qureo.education/api/study/chapters/90006';
             const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
@@ -640,11 +639,10 @@
             const terminal = document.getElementById('terminalLog');
             
             statusEl.innerText = 'يعمل الآن';
-            statusEl.style.color = '#10b981';
+            statusEl.style.color = '#38bdf8';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
 
-            // تشغيل دالة السحب في الخلفية بهدوء
             fetchQureoDataViaProxy();
 
             let currentChapter = 90001;
