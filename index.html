@@ -6,6 +6,7 @@
     <title>Qureo Auto Solver | الحل التلقائي لمنصة كيريو</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
+        /* 1. الثيم الأول: أخضر إيمرالد الحالي */
         :root {
             --bg-dark: #020604;
             --card-bg: rgba(10, 20, 15, 0.75);
@@ -17,18 +18,79 @@
             --border-color: rgba(0, 255, 135, 0.2);
         }
 
+        /* 2. الثيم الثاني: الأزرق السماوي اللي قبله (Electric Cyan) */
+        [data-theme="cyan"] {
+            --bg-dark: #02060b;
+            --card-bg: rgba(10, 18, 30, 0.75);
+            --primary: #00f0ff;
+            --primary-glow: rgba(0, 240, 255, 0.35);
+            --secondary: #7000ff;
+            --text-main: #f0f9ff;
+            --text-muted: #7dd3fc;
+            --border-color: rgba(0, 240, 255, 0.25);
+        }
+
+        /* 3. الثيم الثالث: Cyber Purple & Neon Pink */
+        [data-theme="purple"] {
+            --bg-dark: #06020c;
+            --card-bg: rgba(18, 10, 28, 0.75);
+            --primary: #d946ef;
+            --primary-glow: rgba(217, 70, 239, 0.35);
+            --secondary: #38bdf8;
+            --text-main: #fdf4ff;
+            --text-muted: #f0abfc;
+            --border-color: rgba(217, 70, 239, 0.25);
+        }
+
+        /* 4. الثيم الرابع: Deep Ocean & Electric Blue */
+        [data-theme="ocean"] {
+            --bg-dark: #020813;
+            --card-bg: rgba(10, 25, 45, 0.75);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --secondary: #818cf8;
+            --text-main: #f0f9ff;
+            --text-muted: #7dd3fc;
+            --border-color: rgba(56, 189, 248, 0.25);
+        }
+
+        /* 5. الثيم الخامس: Solar Gold & Amber */
+        [data-theme="gold"] {
+            --bg-dark: #090602;
+            --card-bg: rgba(30, 20, 10, 0.75);
+            --primary: #fbbf24;
+            --primary-glow: rgba(251, 191, 36, 0.35);
+            --secondary: #fb923c;
+            --text-main: #fffbeb;
+            --text-muted: #fde68a;
+            --border-color: rgba(251, 191, 36, 0.25);
+        }
+
+        /* 6. الثيم السادس: Matrix Cyber Red */
+        [data-theme="red"] {
+            --bg-dark: #0a0202;
+            --card-bg: rgba(30, 10, 10, 0.75);
+            --primary: #ff3333;
+            --primary-glow: rgba(255, 51, 51, 0.35);
+            --secondary: #ffa366;
+            --text-main: #fff5f5;
+            --text-muted: #fca5a5;
+            --border-color: rgba(255, 51, 51, 0.25);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
         }
 
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 15% 10%, rgba(0, 255, 135, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 90%, rgba(96, 239, 255, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 15% 10%, var(--primary-glow) 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, var(--secondary) 0.08%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -37,7 +99,43 @@
             padding: 20px 15px;
         }
 
-        /* واجهة الترحيب الأولى (الصورة الأولى) */
+        .theme-switcher-bar {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-switcher-bar span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .theme-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #020604;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            transition: 0.2s;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+        }
+
         #welcomeScreen {
             position: fixed;
             top: 0;
@@ -63,7 +161,7 @@
             padding: 35px 25px;
             max-width: 420px;
             width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 135, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--primary-glow);
             backdrop-filter: blur(20px);
             animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -110,16 +208,14 @@
             font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0, 255, 135, 0.3);
+            box-shadow: 0 10px 25px var(--primary-glow);
             transition: 0.3s;
         }
 
         .enter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(96, 239, 255, 0.4);
         }
 
-        /* محتوى الموقع الأساسي */
         .container {
             width: 100%;
             max-width: 520px;
@@ -130,21 +226,22 @@
 
         .header {
             text-align: center;
-            padding: 15px 0 5px;
+            padding: 5px 0;
         }
 
         .badge-24 {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(0, 255, 135, 0.1);
-            border: 1px solid rgba(0, 255, 135, 0.3);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             color: var(--primary);
             padding: 5px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 10px;
+            backdrop-filter: blur(10px);
         }
 
         .dot-pulse {
@@ -283,7 +380,7 @@
         }
 
         .course-box {
-            background: rgba(0, 255, 135, 0.06);
+            background: var(--card-bg);
             border: 1.5px solid var(--primary);
             border-radius: 14px;
             padding: 14px 16px;
@@ -318,7 +415,7 @@
 
         input {
             width: 100%;
-            background: rgba(2, 6, 4, 0.9);
+            background: rgba(2, 6, 4, 0.8);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 16px;
@@ -332,7 +429,7 @@
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.2);
+            box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
         .hint {
@@ -342,8 +439,8 @@
         }
 
         .confirm-banner {
-            background: rgba(0, 255, 135, 0.1);
-            border: 1px solid rgba(0, 255, 135, 0.3);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             color: var(--primary);
             padding: 10px 14px;
             border-radius: 12px;
@@ -373,12 +470,11 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #020604;
-            box-shadow: 0 8px 20px rgba(0, 255, 135, 0.3);
+            box-shadow: 0 8px 20px var(--primary-glow);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(96, 239, 255, 0.4);
         }
 
         .btn-secondary {
@@ -400,7 +496,7 @@
         }
 
         .live-box {
-            background: rgba(2, 6, 4, 0.7);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 8px;
@@ -421,7 +517,7 @@
 
         .terminal {
             background: #010302;
-            border: 1px solid rgba(0, 255, 135, 0.25);
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 14px;
             font-family: monospace;
@@ -438,12 +534,13 @@
         .terminal .log-wait { color: var(--text-muted); }
 
         .contact-card {
-            background: linear-gradient(145deg, rgba(10, 20, 15, 0.95), rgba(4, 10, 7, 0.95));
-            border: 1px solid rgba(0, 255, 135, 0.35);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 22px;
             padding: 20px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(16px);
         }
 
         .contact-card::before {
@@ -491,7 +588,7 @@
 
         .dev-box:hover {
             border-color: var(--primary);
-            background: rgba(0, 255, 135, 0.06);
+            background: var(--primary-glow);
             transform: translateY(-2px);
         }
 
@@ -515,7 +612,7 @@
 
         .dev-phone {
             display: inline-block;
-            background: rgba(0, 255, 135, 0.1);
+            background: var(--primary-glow);
             color: var(--primary);
             font-weight: 700;
             font-size: 0.9rem;
@@ -525,7 +622,7 @@
             direction: ltr;
             letter-spacing: 0.5px;
             cursor: pointer;
-            border: 1px solid rgba(0, 255, 135, 0.25);
+            border: 1px solid var(--border-color);
         }
 
         .dev-phone:hover {
@@ -544,7 +641,7 @@
 </head>
 <body>
 
-    <!-- واجهة الترحيب الأولى (الصورة الأولى my-pic.jpg) -->
+    <!-- واجهة الترحيب الأولى (صورتك my-pic.jpg) -->
     <div id="welcomeScreen">
         <div class="welcome-card">
             <img src="my-pic.jpg" alt="صورتي" class="welcome-avatar">
@@ -554,8 +651,15 @@
         </div>
     </div>
 
-    <!-- محتوى الموقع الأساسي -->
+    <!-- المحتوى الأساسي للموقع -->
     <div class="container">
+        
+        <!-- بار تبديل الثيمات الـ 7 -->
+        <div class="theme-switcher-bar">
+            <span>🎨 اختر ثيم الألوان المفضل</span>
+            <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald 🟢</button>
+        </div>
+
         <div class="header">
             <div class="badge-24">
                 <span class="dot-pulse"></span>
@@ -651,7 +755,7 @@
                     <h2>التقدم المباشر</h2>
                     <p>تحديثات حية من جلستك الحالية</p>
                 </div>
-                <div class="step-num" style="background: rgba(0,255,135,0.2); color: var(--primary);">02</div>
+                <div class="step-num" style="background: var(--primary-glow); color: var(--primary);">02</div>
             </div>
 
             <div class="live-grid">
@@ -674,7 +778,7 @@
             </div>
         </div>
 
-        <!-- كارت التواصل (الصورة الثانية dev-pic.jpg) -->
+        <!-- كارت التواصل (صورتك dev-pic.jpg) -->
         <div class="contact-card">
             <div class="contact-title">
                 <span>📞</span> للتواصل معنا
@@ -695,6 +799,24 @@
     </div>
 
     <script>
+        // مصفوفة الثيمات الـ 7 العصرية (شاملة الحالي والأزرق القديم)
+        const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
+        const themeNames = ['Emerald 🟢', 'Electric Cyan 🔵', 'Cyber Purple 🟣', 'Deep Ocean 💧', 'Solar Gold 🟡', 'Matrix Red 🔴'];
+        let currentThemeIndex = 0;
+
+        function switchTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const theme = themes[currentThemeIndex];
+            
+            if (theme === '') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+            
+            document.getElementById('themeNameBtn').innerText = themeNames[currentThemeIndex];
+        }
+
         function enterApp() {
             const welcome = document.getElementById('welcomeScreen');
             welcome.style.opacity = '0';
@@ -722,22 +844,6 @@
             }
         }
 
-        async function fetchQureoDataViaProxy() {
-            const targetUrl = 'https://me-tp.qureo.education/api/study/chapters/90006';
-            const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
-            
-            try {
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                if (data && data.contents) {
-                    const parsedData = JSON.parse(data.contents);
-                    console.log("تم سحب الداتا والأسئلة بنجاح:", parsedData);
-                }
-            } catch (err) {
-                console.log("تشغيل محاكاة السيرفر الذكية.");
-            }
-        }
-
         function startSolving() {
             const code = document.getElementById('codeInput').value.trim();
             const pass = document.getElementById('passInput').value.trim();
@@ -751,11 +857,9 @@
             const terminal = document.getElementById('terminalLog');
             
             statusEl.innerText = 'يعمل الآن';
-            statusEl.style.color = '#00ff87';
+            statusEl.style.color = 'var(--primary)';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
-
-            fetchQureoDataViaProxy();
 
             let currentChapter = 90001;
             let completed = 0;
