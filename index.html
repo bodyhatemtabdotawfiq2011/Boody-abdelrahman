@@ -651,7 +651,7 @@
         .terminal .log-info { color: var(--secondary); }
         .terminal .log-wait { color: var(--text-muted); }
 
-        /* لعبة Cyber Dodge */
+        /* لعبة Cyber Snake */
         .arcade-box {
             background: #010402;
             border: 1.5px solid var(--primary);
@@ -680,43 +680,96 @@
             direction: ltr;
         }
 
-        #dodgeCanvas {
+        .snake-canvas-wrap {
+            position: relative;
             width: 100%;
-            height: 220px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        #snakeCanvas {
+            width: 100%;
+            aspect-ratio: 1 / 1;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             display: block;
             touch-action: none;
-            cursor: pointer;
         }
 
-        .arcade-controls {
-            display: flex;
+        .game-over-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 4, 0.86);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 10px;
+            padding: 15px;
         }
 
-        .pad-btn {
+        .game-over-overlay h4 {
+            color: #ff4d6d;
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+
+        .game-over-overlay p {
+            color: var(--text-main);
+            font-size: 0.85rem;
+        }
+
+        .restart-snake-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #020604;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .dpad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 54px);
+            grid-template-rows: repeat(2, 42px);
+            gap: 6px;
+            justify-content: center;
+            margin-top: 10px;
+            direction: ltr;
+        }
+
+        .dpad-btn {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 7px 22px;
             border-radius: 10px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 1rem;
             cursor: pointer;
             user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .pad-btn:active {
+        .dpad-btn:active {
             background: var(--primary);
             color: #020604;
         }
 
+        .dpad-up { grid-column: 2; grid-row: 1; }
+        .dpad-left { grid-column: 1; grid-row: 2; }
+        .dpad-down { grid-column: 2; grid-row: 2; }
+        .dpad-right { grid-column: 3; grid-row: 2; }
+
         .arcade-note {
-            margin-top: 6px;
+            margin-top: 8px;
             font-size: 0.72rem;
             color: var(--text-muted);
         }
@@ -1006,15 +1059,24 @@
 
             <div class="arcade-box" id="arcadeBox">
                 <div class="arcade-top">
-                    <span class="arcade-title">🎮 CYBER DODGE</span>
-                    <span class="arcade-score" id="arcadeScoreText">SCORE: 0 | BEST: 0</span>
+                    <span class="arcade-title">🐍 CYBER SNAKE</span>
+                    <span class="arcade-score" id="snakeScoreText">SCORE: 0 | BEST: 0</span>
                 </div>
-                <canvas id="dodgeCanvas"></canvas>
-                <div class="arcade-controls">
-                    <button class="pad-btn" id="btnLeft">⬅ يسار</button>
-                    <button class="pad-btn" id="btnRight">يمين ➡</button>
+                <div class="snake-canvas-wrap">
+                    <canvas id="snakeCanvas" width="300" height="300"></canvas>
+                    <div class="game-over-overlay" id="snakeGameOver">
+                        <h4>💥 خسرت!</h4>
+                        <p id="finalSnakeScore">سكورك: 0</p>
+                        <button class="restart-snake-btn" onclick="startSnakeGame()">العب تاني 🔄</button>
+                    </div>
                 </div>
-                <div class="arcade-note" id="arcadeNote">اجمع النجوم الذهبية وتفادى الكتل الحمراء • أو اسحب بصباعك / الأسهم</div>
+                <div class="dpad-grid">
+                    <button class="dpad-btn dpad-up" onclick="setSnakeDir(0, -1)">▲</button>
+                    <button class="dpad-btn dpad-left" onclick="setSnakeDir(-1, 0)">◀</button>
+                    <button class="dpad-btn dpad-down" onclick="setSnakeDir(0, 1)">▼</button>
+                    <button class="dpad-btn dpad-right" onclick="setSnakeDir(1, 0)">▶</button>
+                </div>
+                <div class="arcade-note" id="arcadeNote">اسحب بصباعك على الشاشة أو استخدم الأزرار • اللعبة مكملة لحد ما تخسر!</div>
             </div>
         </div>
 
@@ -1148,197 +1210,194 @@
             }
         }
 
-        // محرك لعبة Cyber Dodge
-        const canvas = document.getElementById('dodgeCanvas');
-        const ctx = canvas.getContext('2d');
-        let gameAnimId = null;
-        let gameActive = false;
-        let score = 0;
-        let bestScore = Number(localStorage.getItem('qureoDodgeBest') || 0);
-        let moveLeft = false;
-        let moveRight = false;
+        // محرك لعبة Cyber Snake (مكملة لحد الخسارة)
+        const snakeCanvas = document.getElementById('snakeCanvas');
+        const sCtx = snakeCanvas.getContext('2d');
+        const gridSize = 15;
+        const tileCount = snakeCanvas.width / gridSize; // 20x20
 
-        const player = { x: 140, y: 185, w: 30, h: 18, speed: 5 };
-        let items = [];
-        let spawnTimer = 0;
-        let baseSpeed = 2.6;
-
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            if (rect.width > 0) {
-                canvas.width = rect.width;
-                canvas.height = 220;
-                player.y = canvas.height - 28;
-                player.x = Math.min(Math.max(player.x, 6), canvas.width - player.w - 6);
-            }
-        }
-
-        function resetGame() {
-            resizeCanvas();
-            score = 0;
-            baseSpeed = 2.6;
-            spawnTimer = 0;
-            items = [];
-            player.x = (canvas.width - player.w) / 2;
-            updateScoreLabel();
-        }
-
-        function updateScoreLabel() {
-            document.getElementById('arcadeScoreText').innerText = `SCORE: ${score} | BEST: ${bestScore}`;
-        }
+        let snake = [];
+        let dir = { x: 1, y: 0 };
+        let nextDir = { x: 1, y: 0 };
+        let food = { x: 10, y: 10 };
+        let snakeScore = 0;
+        let snakeBest = Number(localStorage.getItem('qureoSnakeBest') || 0);
+        let snakeInterval = null;
+        let snakeRunning = false;
 
         function getPrimaryColor() {
             return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#00ff87';
         }
 
-        function spawnItem() {
-            const isCoin = Math.random() < 0.35;
-            const size = isCoin ? 14 : 24;
-            const x = 10 + Math.random() * Math.max(20, canvas.width - size - 20);
-            items.push({
-                x: x,
-                y: -size,
-                w: size,
-                h: size,
-                isCoin: isCoin,
-                vy: baseSpeed + Math.random() * 1.4
+        function updateSnakeScoreUI() {
+            document.getElementById('snakeScoreText').innerText = `SCORE: ${snakeScore} | BEST: ${snakeBest}`;
+        }
+
+        function spawnFood() {
+            let valid = false;
+            while (!valid) {
+                food = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
+                valid = !snake.some(seg => seg.x === food.x && seg.y === food.y);
+            }
+        }
+
+        function startSnakeGame() {
+            document.getElementById('arcadeBox').style.display = 'block';
+            document.getElementById('snakeGameOver').style.display = 'none';
+
+            snake = [
+                { x: 6, y: 10 },
+                { x: 5, y: 10 },
+                { x: 4, y: 10 }
+            ];
+            dir = { x: 1, y: 0 };
+            nextDir = { x: 1, y: 0 };
+            snakeScore = 0;
+            snakeRunning = true;
+            updateSnakeScoreUI();
+            spawnFood();
+
+            if (snakeInterval) clearInterval(snakeInterval);
+            snakeInterval = setInterval(stepSnake, 130);
+            drawSnake();
+        }
+
+        function setSnakeDir(nx, ny) {
+            if (!snakeRunning) return;
+            if (nx === -dir.x && ny === -dir.y) return;
+            nextDir = { x: nx, y: ny };
+        }
+
+        function endSnakeGame() {
+            snakeRunning = false;
+            clearInterval(snakeInterval);
+            document.getElementById('finalSnakeScore').innerText = `سكورك: ${snakeScore} | الأعلى: ${snakeBest}`;
+            document.getElementById('snakeGameOver').style.display = 'flex';
+        }
+
+        function stepSnake() {
+            if (!snakeRunning) return;
+
+            dir = nextDir;
+            const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+            // الاصطدام بالجدران
+            if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+                endSnakeGame();
+                return;
+            }
+
+            // الاصطدام بالجسم
+            if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
+                endSnakeGame();
+                return;
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                snakeScore += 10;
+                if (snakeScore > snakeBest) {
+                    snakeBest = snakeScore;
+                    localStorage.setItem('qureoSnakeBest', snakeBest);
+                }
+                updateSnakeScoreUI();
+                spawnFood();
+            } else {
+                snake.pop();
+            }
+
+            drawSnake();
+        }
+
+        function drawSnake() {
+            sCtx.clearRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+            // شبكة خفيفة في الخلفية
+            sCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+            sCtx.lineWidth = 1;
+            for (let i = 1; i < tileCount; i++) {
+                sCtx.beginPath();
+                sCtx.moveTo(i * gridSize, 0);
+                sCtx.lineTo(i * gridSize, snakeCanvas.height);
+                sCtx.stroke();
+                sCtx.beginPath();
+                sCtx.moveTo(0, i * gridSize);
+                sCtx.lineTo(snakeCanvas.width, i * gridSize);
+                sCtx.stroke();
+            }
+
+            // رسم التفاحة / نقطة الطاقة
+            sCtx.fillStyle = '#fbbf24';
+            sCtx.beginPath();
+            sCtx.arc(
+                food.x * gridSize + gridSize / 2,
+                food.y * gridSize + gridSize / 2,
+                gridSize / 2.4,
+                0,
+                Math.PI * 2
+            );
+            sCtx.fill();
+
+            // رسم التعبان
+            const primaryCol = getPrimaryColor();
+            snake.forEach((seg, index) => {
+                sCtx.fillStyle = index === 0 ? '#ffffff' : primaryCol;
+                sCtx.beginPath();
+                sCtx.roundRect(
+                    seg.x * gridSize + 1,
+                    seg.y * gridSize + 1,
+                    gridSize - 2,
+                    gridSize - 2,
+                    4
+                );
+                sCtx.fill();
             });
         }
 
-        function isColliding(a, b) {
-            return a.x < b.x + b.w &&
-                   a.x + a.w > b.x &&
-                   a.y < b.y + b.h &&
-                   a.y + a.h > b.y;
-        }
-
-        function gameLoop() {
-            if (!gameActive) return;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            if (moveLeft) player.x -= player.speed;
-            if (moveRight) player.x += player.speed;
-            player.x = Math.min(Math.max(player.x, 6), canvas.width - player.w - 6);
-
-            const primaryCol = getPrimaryColor();
-            ctx.fillStyle = primaryCol;
-            ctx.beginPath();
-            ctx.roundRect(player.x, player.y, player.w, player.h, 5);
-            ctx.fill();
-
-            spawnTimer++;
-            const spawnInterval = Math.max(18, 36 - Math.floor(score / 8));
-            if (spawnTimer >= spawnInterval) {
-                spawnItem();
-                spawnTimer = 0;
-            }
-
-            baseSpeed = 2.6 + Math.min(4.5, score * 0.04);
-
-            for (let i = items.length - 1; i >= 0; i--) {
-                const it = items[i];
-                it.y += it.vy;
-
-                if (it.isCoin) {
-                    ctx.fillStyle = '#fbbf24';
-                    ctx.beginPath();
-                    ctx.arc(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, 0, Math.PI * 2);
-                    ctx.fill();
-                } else {
-                    ctx.fillStyle = '#ff3b5c';
-                    ctx.beginPath();
-                    ctx.roundRect(it.x, it.y, it.w, it.h, 5);
-                    ctx.fill();
-                }
-
-                if (isColliding(player, it)) {
-                    if (it.isCoin) {
-                        score += 5;
-                        if (score > bestScore) {
-                            bestScore = score;
-                            localStorage.setItem('qureoDodgeBest', bestScore);
-                        }
-                        updateScoreLabel();
-                        items.splice(i, 1);
-                        continue;
-                    } else {
-                        document.getElementById('arcadeNote').innerText = '💥 خبطت في عائق! بدأت جولة جديدة تلقائياً';
-                        resetGame();
-                        break;
-                    }
-                }
-
-                if (it.y > canvas.height + 30) {
-                    if (!it.isCoin) {
-                        score += 1;
-                        if (score > bestScore) {
-                            bestScore = score;
-                            localStorage.setItem('qureoDodgeBest', bestScore);
-                        }
-                        updateScoreLabel();
-                    }
-                    items.splice(i, 1);
-                }
-            }
-
-            gameAnimId = requestAnimationFrame(gameLoop);
-        }
-
-        function startDodgeGame() {
-            document.getElementById('arcadeBox').style.display = 'block';
-            gameActive = true;
-            resetGame();
-            if (gameAnimId) cancelAnimationFrame(gameAnimId);
-            gameLoop();
-        }
-
-        function stopDodgeGame() {
-            gameActive = false;
-            if (gameAnimId) cancelAnimationFrame(gameAnimId);
-            document.getElementById('arcadeNote').innerText = `🎉 مبروك خلصت الفصول! أعلى سكور ليك: ${bestScore}`;
-        }
-
+        // تحكم الكيبورد والسحب (Swipe) للموبايل
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = true;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = true;
+            if (!snakeRunning) return;
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') setSnakeDir(0, -1);
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') setSnakeDir(0, 1);
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') setSnakeDir(-1, 0);
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') setSnakeDir(1, 0);
         });
 
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = false;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = false;
-        });
+        let touchStartX = 0;
+        let touchStartY = 0;
 
-        const btnLeft = document.getElementById('btnLeft');
-        const btnRight = document.getElementById('btnRight');
+        snakeCanvas.addEventListener('touchstart', (e) => {
+            if (!e.touches[0]) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
 
-        ['mousedown', 'touchstart'].forEach(ev => {
-            btnLeft.addEventListener(ev, (e) => { e.preventDefault(); moveLeft = true; });
-            btnRight.addEventListener(ev, (e) => { e.preventDefault(); moveRight = true; });
-        });
-
-        ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(ev => {
-            btnLeft.addEventListener(ev, () => { moveLeft = false; });
-            btnRight.addEventListener(ev, () => { moveRight = false; });
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            if (!gameActive || !e.touches[0]) return;
+        snakeCanvas.addEventListener('touchmove', (e) => {
+            if (!snakeRunning) return;
             e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touchX = e.touches[0].clientX - rect.left;
-            player.x = Math.min(Math.max(touchX - player.w / 2, 6), canvas.width - player.w - 6);
         }, { passive: false });
 
-        canvas.addEventListener('mousemove', (e) => {
-            if (!gameActive || e.buttons !== 1) return;
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            player.x = Math.min(Math.max(mouseX - player.w / 2, 6), canvas.width - player.w - 6);
-        });
+        snakeCanvas.addEventListener('touchend', (e) => {
+            if (!snakeRunning || !e.changedTouches[0]) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
 
-        window.addEventListener('resize', () => {
-            if (gameActive) resizeCanvas();
+            if (Math.abs(dx) < 15 && Math.abs(dy) < 15) return;
+
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 0) setSnakeDir(1, 0);
+                else setSnakeDir(-1, 0);
+            } else {
+                if (dy > 0) setSnakeDir(0, 1);
+                else setSnakeDir(0, -1);
+            }
         });
 
         function startSolving() {
@@ -1358,7 +1417,10 @@
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
 
-            startDodgeGame();
+            // بدء لعبة التعبان لو مش شغالة حالياً
+            if (!snakeRunning) {
+                startSnakeGame();
+            }
 
             let currentChapter = 90001;
             let completed = 0;
@@ -1377,8 +1439,8 @@
                     statusEl.innerText = 'مكتمل بنجاح ✓';
                     terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
                     terminal.scrollTop = terminal.scrollHeight;
-                    stopDodgeGame();
                     launchConfetti();
+                    // اللعبة بتفضل مكملة ومش بتقف غير لما تخسر!
                 }
             }, 300);
         }
