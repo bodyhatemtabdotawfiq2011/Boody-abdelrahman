@@ -99,7 +99,6 @@
             padding: 20px 15px;
         }
 
-        /* بار التحكم العلوي (الثيمات + دليل الاستخدام) */
         .top-control-bar {
             width: 100%;
             max-width: 520px;
@@ -161,7 +160,6 @@
             transform: scale(1.05);
         }
 
-        /* نافذة المساعدة / الأسئلة الشائعة (FAQ Modal) */
         #faqModal {
             position: fixed;
             top: 0;
@@ -244,7 +242,6 @@
             line-height: 1.5;
         }
 
-        /* واجهة الترحيب الأولى (صورتك my-pic.jpg) */
         #welcomeScreen {
             position: fixed;
             top: 0;
@@ -634,51 +631,82 @@
             color: var(--primary);
             direction: ltr;
             text-align: left;
-            max-height: 140px;
+            max-height: 120px;
             overflow-y: auto;
             line-height: 1.6;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .terminal .log-info { color: var(--secondary); }
         .terminal .log-wait { color: var(--text-muted); }
 
-        /* ستايل كارت لعبة التسلية وقت الانتظار */
-        .mini-game-box {
-            background: rgba(2, 6, 4, 0.85);
-            border: 1px solid var(--primary);
-            border-radius: 14px;
-            padding: 14px;
+        /* لعبة Cyber Dodge */
+        .arcade-box {
+            background: #010402;
+            border: 1.5px solid var(--primary);
+            border-radius: 16px;
+            padding: 12px;
             text-align: center;
-            display: none; /* تظهر فقط لما الحل يبدأ */
+            display: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        .mini-game-box h4 {
-            font-size: 0.9rem;
-            color: var(--primary);
+        .arcade-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
         }
 
-        .game-click-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #020604;
-            border: none;
-            padding: 10px 20px;
+        .arcade-title {
+            color: var(--primary);
+        }
+
+        .arcade-score {
+            color: var(--secondary);
+            direction: ltr;
+        }
+
+        #dodgeCanvas {
+            width: 100%;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            font-weight: 900;
-            font-size: 0.95rem;
+            display: block;
+            touch-action: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px var(--primary-glow);
-            transition: 0.15s;
         }
 
-        .game-click-btn:active {
-            transform: scale(0.95);
+        .arcade-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
         }
 
-        .game-score {
-            margin-top: 8px;
-            font-size: 0.8rem;
+        .pad-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 7px 22px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .pad-btn:active {
+            background: var(--primary);
+            color: #020604;
+        }
+
+        .arcade-note {
+            margin-top: 6px;
+            font-size: 0.72rem;
             color: var(--text-muted);
         }
 
@@ -799,7 +827,6 @@
 </head>
 <body>
 
-    <!-- نافذة المساعدة / الأسئلة الشائعة (FAQ Modal) -->
     <div id="faqModal">
         <div class="faq-card">
             <div class="faq-header">
@@ -809,7 +836,7 @@
             <div class="faq-body">
                 <div class="faq-item">
                     <h4>1. ما هو نظام Qureo Solver Pro؟</h4>
-                    <p>هو نظام مخصص لتسهيل إنجاز وحل فصول منصة كيريو التعليمية للمرحلة الثانوية بشكل ذكي وسريع.</p>
+                    <p>نظام مخصص لتسهيل إنجاز وحل فصول منصة كيريو التعليمية للمرحلة الثانوية بشكل سريع.</p>
                 </div>
                 <div class="faq-item">
                     <h4>2. من أين أحصل على كود الطالب وكلمة المرور؟</h4>
@@ -817,17 +844,16 @@
                 </div>
                 <div class="faq-item">
                     <h4>3. هل بياناتي وحسابي آمنون؟</h4>
-                    <p>نعم بالكامل! بياناتك تُستخدم لحظياً لإتمام الجلسة فقط ولا يتم تخزينها أو حفظها نهائياً لدى أي طرف.</p>
+                    <p>نعم بالكامل، بياناتك تُستخدم لحظياً لإتمام الجلسة فقط ولا يتم تخزينها لدى أي طرف.</p>
                 </div>
                 <div class="faq-item">
                     <h4>4. كيف أقوم بتغيير ألوان الثيم؟</h4>
-                    <p>يمكنك الضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 7 ميكسات ألوان عصرية تناسب ذوقك.</p>
+                    <p>اضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 6 ميكسات ألوان عصرية.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- واجهة الترحيب الأولى (صورتك my-pic.jpg) -->
     <div id="welcomeScreen">
         <div class="welcome-card">
             <img src="my-pic.jpg" alt="صورتي" class="welcome-avatar">
@@ -837,10 +863,7 @@
         </div>
     </div>
 
-    <!-- المحتوى الأساسي للموقع -->
     <div class="container">
-        
-        <!-- بار التحكم العلوي: الثيمات + زرار الدليل -->
         <div class="top-control-bar">
             <div class="theme-switcher-bar">
                 <span>🎨 الثيم</span>
@@ -968,15 +991,20 @@
                 <div class="log-wait">> System ready. Waiting for user credentials...</div>
             </div>
 
-            <!-- لعبة التسلية المصغرة وقت الانتظار -->
-            <div class="mini-game-box" id="miniGameBox">
-                <h4>🎮 العب لحد ما السيرفر يخلص!</h4>
-                <button class="game-click-btn" onclick="increaseScore()">اضغط هنا بسرعة ⚡</button>
-                <div class="game-score">النقاط: <span id="gameScoreVal">0</span> نقطة</div>
+            <div class="arcade-box" id="arcadeBox">
+                <div class="arcade-top">
+                    <span class="arcade-title">🎮 CYBER DODGE</span>
+                    <span class="arcade-score" id="arcadeScoreText">SCORE: 0 | BEST: 0</span>
+                </div>
+                <canvas id="dodgeCanvas"></canvas>
+                <div class="arcade-controls">
+                    <button class="pad-btn" id="btnLeft">⬅ يسار</button>
+                    <button class="pad-btn" id="btnRight">يمين ➡</button>
+                </div>
+                <div class="arcade-note" id="arcadeNote">اجمع النجوم الذهبية وتفادى الكتل الحمراء • أو اسحب بصباعك / الأسهم</div>
             </div>
         </div>
 
-        <!-- كارت التواصل -->
         <div class="contact-card">
             <div class="contact-title">
                 <span>📞</span> للتواصل معنا
@@ -1000,11 +1028,7 @@
     <script>
         function toggleFaq() {
             const modal = document.getElementById('faqModal');
-            if (modal.style.display === 'flex') {
-                modal.style.display = 'none';
-            } else {
-                modal.style.display = 'flex';
-            }
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
         const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
@@ -1014,13 +1038,11 @@
         function switchTheme() {
             currentThemeIndex = (currentThemeIndex + 1) % themes.length;
             const theme = themes[currentThemeIndex];
-            
             if (theme === '') {
                 document.documentElement.removeAttribute('data-theme');
             } else {
                 document.documentElement.setAttribute('data-theme', theme);
             }
-            
             document.getElementById('themeNameBtn').innerText = themeNames[currentThemeIndex];
         }
 
@@ -1051,12 +1073,200 @@
             }
         }
 
-        // كود لعبة التسلية
-        let clickScore = 0;
-        function increaseScore() {
-            clickScore++;
-            document.getElementById('gameScoreVal').innerText = clickScore;
+        // محرك لعبة Cyber Dodge
+        const canvas = document.getElementById('dodgeCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameAnimId = null;
+        let gameActive = false;
+        let score = 0;
+        let bestScore = Number(localStorage.getItem('qureoDodgeBest') || 0);
+        let moveLeft = false;
+        let moveRight = false;
+
+        const player = { x: 140, y: 185, w: 30, h: 18, speed: 5 };
+        let items = [];
+        let spawnTimer = 0;
+        let baseSpeed = 2.6;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width > 0) {
+                canvas.width = rect.width;
+                canvas.height = 220;
+                player.y = canvas.height - 28;
+                player.x = Math.min(Math.max(player.x, 6), canvas.width - player.w - 6);
+            }
         }
+
+        function resetGame() {
+            resizeCanvas();
+            score = 0;
+            baseSpeed = 2.6;
+            spawnTimer = 0;
+            items = [];
+            player.x = (canvas.width - player.w) / 2;
+            updateScoreLabel();
+        }
+
+        function updateScoreLabel() {
+            document.getElementById('arcadeScoreText').innerText = `SCORE: ${score} | BEST: ${bestScore}`;
+        }
+
+        function getPrimaryColor() {
+            return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#00ff87';
+        }
+
+        function spawnItem() {
+            const isCoin = Math.random() < 0.35;
+            const size = isCoin ? 14 : 24;
+            const x = 10 + Math.random() * Math.max(20, canvas.width - size - 20);
+            items.push({
+                x: x,
+                y: -size,
+                w: size,
+                h: size,
+                isCoin: isCoin,
+                vy: baseSpeed + Math.random() * 1.4
+            });
+        }
+
+        function isColliding(a, b) {
+            return a.x < b.x + b.w &&
+                   a.x + a.w > b.x &&
+                   a.y < b.y + b.h &&
+                   a.y + a.h > b.y;
+        }
+
+        function gameLoop() {
+            if (!gameActive) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (moveLeft) player.x -= player.speed;
+            if (moveRight) player.x += player.speed;
+            player.x = Math.min(Math.max(player.x, 6), canvas.width - player.w - 6);
+
+            const primaryCol = getPrimaryColor();
+            ctx.fillStyle = primaryCol;
+            ctx.beginPath();
+            ctx.roundRect(player.x, player.y, player.w, player.h, 5);
+            ctx.fill();
+
+            spawnTimer++;
+            const spawnInterval = Math.max(18, 36 - Math.floor(score / 8));
+            if (spawnTimer >= spawnInterval) {
+                spawnItem();
+                spawnTimer = 0;
+            }
+
+            baseSpeed = 2.6 + Math.min(4.5, score * 0.04);
+
+            for (let i = items.length - 1; i >= 0; i--) {
+                const it = items[i];
+                it.y += it.vy;
+
+                if (it.isCoin) {
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.beginPath();
+                    ctx.arc(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = '#ff3b5c';
+                    ctx.beginPath();
+                    ctx.roundRect(it.x, it.y, it.w, it.h, 5);
+                    ctx.fill();
+                }
+
+                if (isColliding(player, it)) {
+                    if (it.isCoin) {
+                        score += 5;
+                        if (score > bestScore) {
+                            bestScore = score;
+                            localStorage.setItem('qureoDodgeBest', bestScore);
+                        }
+                        updateScoreLabel();
+                        items.splice(i, 1);
+                        continue;
+                    } else {
+                        // خبطت في عائق أحمر: إعادة جولة فورية
+                        document.getElementById('arcadeNote').innerText = '💥 خبطت في عائق! بدأت جولة جديدة تلقائياً';
+                        resetGame();
+                        break;
+                    }
+                }
+
+                if (it.y > canvas.height + 30) {
+                    if (!it.isCoin) {
+                        score += 1;
+                        if (score > bestScore) {
+                            bestScore = score;
+                            localStorage.setItem('qureoDodgeBest', bestScore);
+                        }
+                        updateScoreLabel();
+                    }
+                    items.splice(i, 1);
+                }
+            }
+
+            gameAnimId = requestAnimationFrame(gameLoop);
+        }
+
+        function startDodgeGame() {
+            document.getElementById('arcadeBox').style.display = 'block';
+            gameActive = true;
+            resetGame();
+            if (gameAnimId) cancelAnimationFrame(gameAnimId);
+            gameLoop();
+        }
+
+        function stopDodgeGame() {
+            gameActive = false;
+            if (gameAnimId) cancelAnimationFrame(gameAnimId);
+            document.getElementById('arcadeNote').innerText = `🏁 خلصت الفصول! أعلى سكور ليك: ${bestScore}`;
+        }
+
+        // تحكم الكيبورد واللمس والزراير
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = true;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = false;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = false;
+        });
+
+        const btnLeft = document.getElementById('btnLeft');
+        const btnRight = document.getElementById('btnRight');
+
+        ['mousedown', 'touchstart'].forEach(ev => {
+            btnLeft.addEventListener(ev, (e) => { e.preventDefault(); moveLeft = true; });
+            btnRight.addEventListener(ev, (e) => { e.preventDefault(); moveRight = true; });
+        });
+
+        ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(ev => {
+            btnLeft.addEventListener(ev, () => { moveLeft = false; });
+            btnRight.addEventListener(ev, () => { moveRight = false; });
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!gameActive || !e.touches[0]) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touchX = e.touches[0].clientX - rect.left;
+            player.x = Math.min(Math.max(touchX - player.w / 2, 6), canvas.width - player.w - 6);
+        }, { passive: false });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!gameActive || e.buttons !== 1) return;
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            player.x = Math.min(Math.max(mouseX - player.w / 2, 6), canvas.width - player.w - 6);
+        });
+
+        window.addEventListener('resize', () => {
+            if (gameActive) resizeCanvas();
+        });
 
         function startSolving() {
             const code = document.getElementById('codeInput').value.trim();
@@ -1069,14 +1279,13 @@
 
             const statusEl = document.getElementById('statusText');
             const terminal = document.getElementById('terminalLog');
-            
+
             statusEl.innerText = 'يعمل الآن';
             statusEl.style.color = 'var(--primary)';
 
             terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
 
-            // إظهار لعبة التسلية فور بدء العملية
-            document.getElementById('miniGameBox').style.display = 'block';
+            startDodgeGame();
 
             let currentChapter = 90001;
             let completed = 0;
@@ -1087,7 +1296,7 @@
                 document.getElementById('completedCount').innerText = `${completed} / 42`;
                 terminal.innerHTML += `<div>> Chapter ${currentChapter}: syncing & auto-solving... Done!</div>`;
                 terminal.scrollTop = terminal.scrollHeight;
-                
+
                 currentChapter++;
 
                 if (completed >= 42) {
@@ -1095,9 +1304,7 @@
                     statusEl.innerText = 'مكتمل بنجاح ✓';
                     terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
                     terminal.scrollTop = terminal.scrollHeight;
-                    
-                    // إخفاء اللعبة وإظهار رسالة مبروك بالنقاط
-                    document.getElementById('miniGameBox').innerHTML = `<h4>🎉 مبروك تم الانتهاء! جمعت ${clickScore} نقطة أثناء الانتظار ⚡</h4>`;
+                    stopDodgeGame();
                 }
             }, 300);
         }
