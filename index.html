@@ -6,7 +6,7 @@
     <title>Qureo Auto Solver | الحل التلقائي لمنصة كيريو</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 1. الثيم الأول: أخضر إيمرالد */
+        /* 1. الثيم الأول: أخضر إيمرالد الحالي */
         :root {
             --bg-dark: #020604;
             --card-bg: rgba(10, 20, 15, 0.75);
@@ -15,7 +15,7 @@
             --secondary: #60efff;
             --text-main: #f0fdf4;
             --text-muted: #86efac;
-            --border-color: rgba(0, 255, 135, 0.25);
+            --border-color: rgba(0, 255, 135, 0.2);
         }
 
         /* 2. الثيم الثاني: الأزرق السماوي (Electric Cyan) */
@@ -389,18 +389,6 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--primary-glow);
             backdrop-filter: blur(20px);
             animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
         }
 
         @keyframes scaleUp {
@@ -416,16 +404,10 @@
             border: 3px solid var(--primary);
             box-shadow: 0 0 25px var(--primary-glow);
             margin-bottom: 15px;
-            animation: floatAvatar 3s ease-in-out infinite;
-        }
-
-        @keyframes floatAvatar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .welcome-card h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: #fff;
             margin-bottom: 10px;
@@ -1049,8 +1031,8 @@
     <div id="welcomeScreen">
         <div class="welcome-card">
             <img src="my-pic.jpg" alt="صورتي" class="welcome-avatar">
-            <h2>عبدالرحمن ومدحت يرحبوا بكم</h2>
-            <p>ويتمنوا لكم تجربة ممتعة وسريعة مع نظام الحل التلقائي لفصول منصة كيريو.</p>
+            <h2>مرحباً بكم في موقعنا</h2>
+            <p>نتمنى لكم تجربة ممتعة وسريعة مع نظام الحل التلقائي لفصول منصة كيريو.</p>
             <button class="enter-btn" onclick="enterApp()">دخول للموقع 🚀</button>
         </div>
     </div>
@@ -1058,7 +1040,7 @@
     <div class="container">
         <div class="top-control-bar">
             <div class="theme-switcher-bar">
-                <span>🎨 الثيم (15)</span>
+                <span>🎨 الثيم</span>
                 <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald 🟢</button>
             </div>
             <div class="faq-trigger-btn" onclick="toggleFaq()">
@@ -1555,4 +1537,20 @@
             } else {
                 if (dy > 0) setSnakeDir(0, 1);
                 else setSnakeDir(0, -1);
- 
+            }
+        });
+
+        function startSolving() {
+            const code = document.getElementById('codeInput').value.trim();
+            const pass = document.getElementById('passInput').value.trim();
+
+            if (pass === '') {
+                alert('اكتب كلمة السر عشان نبدأ الحل!');
+                return;
+            }
+
+            const statusEl = document.getElementById('statusText');
+            const terminal = document.getElementById('terminalLog');
+
+            statusEl.innerText = 'يعمل الآن';
+            statusEl.style.color = 'va
