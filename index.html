@@ -435,6 +435,7 @@
             cursor: pointer;
             box-shadow: 0 10px 25px var(--primary-glow);
             transition: 0.3s;
+            touch-action: manipulation;
         }
 
         .enter-btn:hover {
@@ -1030,10 +1031,10 @@
 
     <div id="welcomeScreen">
         <div class="welcome-card">
-            <img src="my-pic.jpg" alt="صورتي" class="welcome-avatar">
+            <img src="my-pic.jpg" alt="صورتي" class="welcome-avatar" onerror="this.style.display='none'">
             <h2>مرحباً بكم في موقعنا</h2>
             <p>نتمنى لكم تجربة ممتعة وسريعة مع نظام الحل التلقائي لفصول منصة كيريو.</p>
-            <button class="enter-btn" onclick="enterApp()">دخول للموقع 🚀</button>
+            <button class="enter-btn" id="enterAppBtn" type="button" onclick="enterApp()">دخول للموقع 🚀</button>
         </div>
     </div>
 
@@ -1263,9 +1264,26 @@
 
         function enterApp() {
             const welcome = document.getElementById('welcomeScreen');
+            if (!welcome) return;
             welcome.style.opacity = '0';
             welcome.style.visibility = 'hidden';
+            welcome.style.pointerEvents = 'none';
+            welcome.style.display = 'none';
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const enterBtn = document.getElementById('enterAppBtn');
+            if (enterBtn) {
+                enterBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    enterApp();
+                });
+                enterBtn.addEventListener('touchend', function (e) {
+                    e.preventDefault();
+                    enterApp();
+                }, { passive: false });
+            }
+        });
 
         function goToStep(step) {
             if (step === 3 && document.getElementById('phoneInput').value.trim().length < 10) {
@@ -1531,26 +1549,4 @@
 
             if (Math.abs(dx) < 15 && Math.abs(dy) < 15) return;
 
-            if (Math.abs(dx) > Math.abs(dy)) {
-                if (dx > 0) setSnakeDir(1, 0);
-                else setSnakeDir(-1, 0);
-            } else {
-                if (dy > 0) setSnakeDir(0, 1);
-                else setSnakeDir(0, -1);
-            }
-        });
-
-        function startSolving() {
-            const code = document.getElementById('codeInput').value.trim();
-            const pass = document.getElementById('passInput').value.trim();
-
-            if (pass === '') {
-                alert('اكتب كلمة السر عشان نبدأ الحل!');
-                return;
-            }
-
-            const statusEl = document.getElementById('statusText');
-            const terminal = document.getElementById('terminalLog');
-
-            statusEl.innerText = 'يعمل الآن';
-            statusEl.style.color = 'va
+            if (Math.abs(dx) > Math.abs(d
