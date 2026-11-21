@@ -6,184 +6,76 @@
     <title>Qureo Auto Solver | الحل التلقائي لمنصة كيريو</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 1. Emerald Neon (الأساسي) */
+        /* 1. الثيم الأول: أخضر إيمرالد الحالي */
         :root {
             --bg-dark: #020604;
-            --card-bg: rgba(10, 20, 15, 0.78);
+            --card-bg: rgba(10, 20, 15, 0.75);
             --primary: #00ff87;
             --primary-glow: rgba(0, 255, 135, 0.35);
             --secondary: #60efff;
             --text-main: #f0fdf4;
             --text-muted: #86efac;
-            --border-color: rgba(0, 255, 135, 0.24);
+            --border-color: rgba(0, 255, 135, 0.2);
         }
 
-        /* 2. Electric Cyan */
+        /* 2. الثيم الثاني: الأزرق السماوي (Electric Cyan) */
         [data-theme="cyan"] {
             --bg-dark: #02060b;
-            --card-bg: rgba(10, 18, 30, 0.78);
+            --card-bg: rgba(10, 18, 30, 0.75);
             --primary: #00f0ff;
             --primary-glow: rgba(0, 240, 255, 0.35);
             --secondary: #7000ff;
             --text-main: #f0f9ff;
             --text-muted: #7dd3fc;
-            --border-color: rgba(0, 240, 255, 0.26);
+            --border-color: rgba(0, 240, 255, 0.25);
         }
 
-        /* 3. Cyber Purple */
+        /* 3. الثيم الثالث: Cyber Purple & Neon Pink */
         [data-theme="purple"] {
             --bg-dark: #06020c;
-            --card-bg: rgba(18, 10, 28, 0.78);
+            --card-bg: rgba(18, 10, 28, 0.75);
             --primary: #d946ef;
             --primary-glow: rgba(217, 70, 239, 0.35);
             --secondary: #38bdf8;
             --text-main: #fdf4ff;
             --text-muted: #f0abfc;
-            --border-color: rgba(217, 70, 239, 0.26);
+            --border-color: rgba(217, 70, 239, 0.25);
         }
 
-        /* 4. Deep Ocean */
+        /* 4. الثيم الرابع: Deep Ocean & Electric Blue */
         [data-theme="ocean"] {
             --bg-dark: #020813;
-            --card-bg: rgba(10, 25, 45, 0.78);
+            --card-bg: rgba(10, 25, 45, 0.75);
             --primary: #38bdf8;
             --primary-glow: rgba(56, 189, 248, 0.35);
             --secondary: #818cf8;
             --text-main: #f0f9ff;
             --text-muted: #7dd3fc;
-            --border-color: rgba(56, 189, 248, 0.26);
+            --border-color: rgba(56, 189, 248, 0.25);
         }
 
-        /* 5. Solar Gold */
+        /* 5. الثيم الخامس: Solar Gold & Amber */
         [data-theme="gold"] {
             --bg-dark: #090602;
-            --card-bg: rgba(30, 20, 10, 0.78);
+            --card-bg: rgba(30, 20, 10, 0.75);
             --primary: #fbbf24;
             --primary-glow: rgba(251, 191, 36, 0.35);
             --secondary: #fb923c;
             --text-main: #fffbeb;
             --text-muted: #fde68a;
-            --border-color: rgba(251, 191, 36, 0.26);
+            --border-color: rgba(251, 191, 36, 0.25);
         }
 
-        /* 6. Matrix Red */
+        /* 6. الثيم السادس: Matrix Cyber Red */
         [data-theme="red"] {
             --bg-dark: #0a0202;
-            --card-bg: rgba(30, 10, 10, 0.78);
+            --card-bg: rgba(30, 10, 10, 0.75);
             --primary: #ff3333;
             --primary-glow: rgba(255, 51, 51, 0.35);
             --secondary: #ffa366;
             --text-main: #fff5f5;
             --text-muted: #fca5a5;
-            --border-color: rgba(255, 51, 51, 0.26);
-        }
-
-        /* 7. Plasma Rose */
-        [data-theme="rose"] {
-            --bg-dark: #0b0207;
-            --card-bg: rgba(32, 10, 22, 0.78);
-            --primary: #fb7185;
-            --primary-glow: rgba(251, 113, 133, 0.35);
-            --secondary: #c084fc;
-            --text-main: #fff1f2;
-            --text-muted: #fda4af;
-            --border-color: rgba(251, 113, 133, 0.26);
-        }
-
-        /* 8. Arctic Ice */
-        [data-theme="arctic"] {
-            --bg-dark: #02090d;
-            --card-bg: rgba(9, 24, 33, 0.78);
-            --primary: #22d3ee;
-            --primary-glow: rgba(34, 211, 238, 0.35);
-            --secondary: #a5f3fc;
-            --text-main: #ecfeff;
-            --text-muted: #67e8f9;
-            --border-color: rgba(34, 211, 238, 0.26);
-        }
-
-        /* 9. Acid Lime */
-        [data-theme="lime"] {
-            --bg-dark: #050902;
-            --card-bg: rgba(16, 28, 8, 0.78);
-            --primary: #a3e635;
-            --primary-glow: rgba(163, 230, 53, 0.35);
-            --secondary: #2dd4bf;
-            --text-main: #f7fee7;
-            --text-muted: #bef264;
-            --border-color: rgba(163, 230, 53, 0.26);
-        }
-
-        /* 10. Sunset Coral */
-        [data-theme="coral"] {
-            --bg-dark: #0b0403;
-            --card-bg: rgba(33, 14, 11, 0.78);
-            --primary: #ff6b4a;
-            --primary-glow: rgba(255, 107, 74, 0.35);
-            --secondary: #facc15;
-            --text-main: #fff7ed;
-            --text-muted: #fdba74;
-            --border-color: rgba(255, 107, 74, 0.26);
-        }
-
-        /* 11. Ultraviolet */
-        [data-theme="ultraviolet"] {
-            --bg-dark: #04020f;
-            --card-bg: rgba(14, 9, 36, 0.78);
-            --primary: #8b5cf6;
-            --primary-glow: rgba(139, 92, 246, 0.35);
-            --secondary: #ec4899;
-            --text-main: #f5f3ff;
-            --text-muted: #c4b5fd;
-            --border-color: rgba(139, 92, 246, 0.26);
-        }
-
-        /* 12. Mint Lagoon */
-        [data-theme="lagoon"] {
-            --bg-dark: #020908;
-            --card-bg: rgba(9, 27, 25, 0.78);
-            --primary: #14b8a6;
-            --primary-glow: rgba(20, 184, 166, 0.35);
-            --secondary: #38bdf8;
-            --text-main: #f0fdfa;
-            --text-muted: #5eead4;
-            --border-color: rgba(20, 184, 166, 0.26);
-        }
-
-        /* 13. Crimson Eclipse */
-        [data-theme="crimson"] {
-            --bg-dark: #090104;
-            --card-bg: rgba(28, 7, 15, 0.78);
-            --primary: #f43f5e;
-            --primary-glow: rgba(244, 63, 94, 0.35);
-            --secondary: #f97316;
-            --text-main: #fff1f2;
-            --text-muted: #fb7185;
-            --border-color: rgba(244, 63, 94, 0.26);
-        }
-
-        /* 14. Royal Sapphire */
-        [data-theme="sapphire"] {
-            --bg-dark: #020510;
-            --card-bg: rgba(9, 17, 42, 0.78);
-            --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.35);
-            --secondary: #06b6d4;
-            --text-main: #eff6ff;
-            --text-muted: #93c5fd;
-            --border-color: rgba(59, 130, 246, 0.26);
-        }
-
-        /* 15. Hyper Copper */
-        [data-theme="copper"] {
-            --bg-dark: #0a0502;
-            --card-bg: rgba(31, 16, 8, 0.78);
-            --primary: #f97316;
-            --primary-glow: rgba(249, 115, 22, 0.35);
-            --secondary: #eab308;
-            --text-main: #fff7ed;
-            --text-muted: #fdba74;
-            --border-color: rgba(249, 115, 22, 0.26);
+            --border-color: rgba(255, 51, 51, 0.25);
         }
 
         * {
@@ -191,21 +83,20 @@
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
-            transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
         }
 
         body {
             background-color: var(--bg-dark);
-            background-image:
-                radial-gradient(circle at 12% 10%, var(--primary-glow) 0%, transparent 45%),
-                radial-gradient(circle at 88% 88%, color-mix(in srgb, var(--secondary) 22%, transparent) 0%, transparent 48%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, transparent 100%);
+            background-image: 
+                radial-gradient(circle at 15% 10%, var(--primary-glow) 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, var(--secondary) 0.08%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 15px 32px;
+            padding: 20px 15px;
         }
 
         /* كانفاس الاحتفالات (Confetti) */
@@ -232,15 +123,14 @@
             border: 1px solid var(--border-color);
             padding: 8px 14px;
             border-radius: 14px;
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
         }
 
         .theme-switcher-bar {
-            flex: 1.35;
+            flex: 1.3;
         }
 
         .faq-trigger-btn {
@@ -251,12 +141,11 @@
             color: var(--primary);
             font-size: 0.8rem;
             font-weight: 700;
+            transition: 0.2s;
         }
 
         .faq-trigger-btn:hover {
-            background: color-mix(in srgb, var(--primary) 14%, var(--card-bg));
-            border-color: var(--primary);
-            transform: translateY(-1px);
+            background: var(--primary-glow);
         }
 
         .theme-switcher-bar span {
@@ -274,11 +163,12 @@
             font-size: 0.75rem;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 4px 14px var(--primary-glow);
+            box-shadow: 0 4px 12px var(--primary-glow);
+            transition: 0.2s;
         }
 
         .theme-btn:hover {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         #faqModal {
@@ -287,7 +177,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 6, 4, 0.86);
+            background: rgba(2, 6, 4, 0.85);
             backdrop-filter: blur(15px);
             z-index: 10000;
             display: none;
@@ -305,7 +195,7 @@
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--primary-glow);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px var(--primary-glow);
             animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -336,6 +226,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
         }
 
         .close-faq:hover {
@@ -369,9 +260,7 @@
             width: 100%;
             height: 100%;
             background-color: var(--bg-dark);
-            background-image:
-                radial-gradient(circle at 20% 20%, var(--primary-glow) 0%, transparent 45%),
-                radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--secondary) 22%, transparent) 0%, transparent 45%);
+            background-image: inherit;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -389,25 +278,13 @@
             padding: 35px 25px;
             max-width: 420px;
             width: 100%;
-            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.85), 0 0 35px var(--primary-glow);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--primary-glow);
             backdrop-filter: blur(20px);
             animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
         }
 
         @keyframes scaleUp {
-            from { opacity: 0; transform: scale(0.92); }
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
 
@@ -417,14 +294,8 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
-            box-shadow: 0 0 28px var(--primary-glow);
+            box-shadow: 0 0 25px var(--primary-glow);
             margin-bottom: 15px;
-            animation: avatarFloat 3.5s ease-in-out infinite;
-        }
-
-        @keyframes avatarFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
         }
 
         .welcome-card h2 {
@@ -455,11 +326,11 @@
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 10px 25px var(--primary-glow);
+            transition: 0.3s;
         }
 
         .enter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 30px var(--primary-glow);
         }
 
         .container {
@@ -488,7 +359,6 @@
             font-weight: 700;
             margin-bottom: 10px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
         .dot-pulse {
@@ -502,7 +372,7 @@
 
         @keyframes pulse {
             0% { transform: scale(0.95); opacity: 0.7; }
-            50% { transform: scale(1.25); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.95); opacity: 0.7; }
         }
 
@@ -512,7 +382,6 @@
             background: linear-gradient(135deg, #ffffff 20%, var(--primary) 60%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.3px;
         }
 
         .header p {
@@ -533,13 +402,7 @@
             border-radius: 14px;
             padding: 10px;
             text-align: center;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .stat-pill:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
+            backdrop-filter: blur(10px);
         }
 
         .stat-pill span {
@@ -558,19 +421,8 @@
             border: 1px solid var(--border-color);
             border-radius: 22px;
             padding: 22px;
-            backdrop-filter: blur(18px);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 22px;
-            pointer-events: none;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .card-header {
@@ -584,14 +436,13 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #020604;
             font-weight: 900;
-            width: 34px;
-            height: 34px;
-            border-radius: 11px;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.9rem;
-            box-shadow: 0 4px 14px var(--primary-glow);
         }
 
         .card-title h2 {
@@ -615,11 +466,12 @@
             flex: 1;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 4px;
+            transition: 0.3s;
         }
 
         .step-line.active {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            box-shadow: 0 0 12px var(--primary-glow);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         .step-content {
@@ -645,7 +497,7 @@
         }
 
         .course-box {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--card-bg);
             border: 1.5px solid var(--primary);
             border-radius: 14px;
             padding: 14px 16px;
@@ -653,11 +505,6 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .course-box:hover {
-            background: color-mix(in srgb, var(--primary) 10%, transparent);
         }
 
         .course-info h3 {
@@ -681,18 +528,18 @@
             justify-content: center;
             font-weight: 900;
             font-size: 1.1rem;
-            box-shadow: 0 4px 12px var(--primary-glow);
         }
 
         input {
             width: 100%;
-            background: rgba(2, 6, 4, 0.82);
+            background: rgba(2, 6, 4, 0.8);
             border: 1.5px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 16px;
             color: #fff;
             font-size: 1rem;
             outline: none;
+            transition: 0.25s;
             text-align: left;
             direction: ltr;
         }
@@ -709,7 +556,7 @@
         }
 
         .confirm-banner {
-            background: color-mix(in srgb, var(--primary) 10%, var(--card-bg));
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--primary);
             padding: 10px 14px;
@@ -734,17 +581,17 @@
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
+            transition: 0.25s;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #020604;
-            box-shadow: 0 8px 22px var(--primary-glow);
+            box-shadow: 0 8px 20px var(--primary-glow);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 26px var(--primary-glow);
         }
 
         .btn-secondary {
@@ -756,7 +603,6 @@
 
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary);
         }
 
         .live-grid {
@@ -767,7 +613,7 @@
         }
 
         .live-box {
-            background: rgba(255, 255, 255, 0.025);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 8px;
@@ -800,7 +646,6 @@
             overflow-y: auto;
             line-height: 1.6;
             margin-bottom: 14px;
-            box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.65);
         }
 
         .terminal .log-info { color: var(--secondary); }
@@ -814,7 +659,7 @@
             padding: 12px;
             text-align: center;
             display: none;
-            box-shadow: 0 0 24px var(--primary-glow);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .arcade-top {
@@ -855,7 +700,7 @@
         .game-over-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(2, 6, 4, 0.88);
+            background: rgba(2, 6, 4, 0.86);
             backdrop-filter: blur(6px);
             border-radius: 12px;
             display: none;
@@ -913,10 +758,6 @@
             justify-content: center;
         }
 
-        .dpad-btn:hover {
-            border-color: var(--primary);
-        }
-
         .dpad-btn:active {
             background: var(--primary);
             color: #020604;
@@ -940,8 +781,7 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(18px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
         }
 
         .contact-card::before {
@@ -984,11 +824,12 @@
             border-radius: 16px;
             padding: 14px;
             text-align: center;
+            transition: 0.25s;
         }
 
         .dev-box:hover {
             border-color: var(--primary);
-            background: color-mix(in srgb, var(--primary) 10%, rgba(255, 255, 255, 0.02));
+            background: var(--primary-glow);
             transform: translateY(-2px);
         }
 
@@ -999,11 +840,11 @@
             object-fit: cover;
             border: 2px solid var(--primary);
             margin-bottom: 8px;
-            box-shadow: 0 0 18px var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: color-mix(in srgb, var(--primary) 16%, transparent);
+            background: var(--primary-glow);
             color: var(--primary);
             font-weight: bold;
             font-size: 1.2rem;
@@ -1021,7 +862,7 @@
 
         .dev-phone {
             display: inline-block;
-            background: color-mix(in srgb, var(--primary) 14%, transparent);
+            background: var(--primary-glow);
             color: var(--primary);
             font-weight: 700;
             font-size: 0.9rem;
@@ -1073,7 +914,7 @@
                 </div>
                 <div class="faq-item">
                     <h4>4. كيف أقوم بتغيير ألوان الثيم؟</h4>
-                    <p>اضغط في أي وقت على زرار الثيمات في أعلى الموقع للتنقل بين 15 ميكس ألوان عصرية.</p>
+                    <p>اضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 6 ميكسات ألوان عصرية.</p>
                 </div>
             </div>
         </div>
@@ -1091,8 +932,8 @@
     <div class="container">
         <div class="top-control-bar">
             <div class="theme-switcher-bar">
-                <span>🎨 الثيم (15)</span>
-                <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald Neon 🟢</button>
+                <span>🎨 الثيم</span>
+                <button class="theme-btn" onclick="switchTheme()" id="themeNameBtn">Emerald 🟢</button>
             </div>
             <div class="faq-trigger-btn" onclick="toggleFaq()">
                 <span>💡 دليل الاستخدام</span>
@@ -1194,7 +1035,7 @@
                     <h2>التقدم المباشر</h2>
                     <p>تحديثات حية من جلستك الحالية</p>
                 </div>
-                <div class="step-num" style="background: color-mix(in srgb, var(--primary) 16%, transparent); color: var(--primary); box-shadow: none;">02</div>
+                <div class="step-num" style="background: var(--primary-glow); color: var(--primary);">02</div>
             </div>
 
             <div class="live-grid">
@@ -1265,42 +1106,8 @@
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        const themes = [
-            '',
-            'cyan',
-            'purple',
-            'ocean',
-            'gold',
-            'red',
-            'rose',
-            'arctic',
-            'lime',
-            'coral',
-            'ultraviolet',
-            'lagoon',
-            'crimson',
-            'sapphire',
-            'copper'
-        ];
-
-        const themeNames = [
-            'Emerald Neon 🟢',
-            'Electric Cyan 🔵',
-            'Cyber Purple 🟣',
-            'Deep Ocean 💧',
-            'Solar Gold 🟡',
-            'Matrix Red 🔴',
-            'Plasma Rose 🌸',
-            'Arctic Ice ❄️',
-            'Acid Lime 🍋',
-            'Sunset Coral 🪸',
-            'Ultraviolet ⚡',
-            'Mint Lagoon 🌊',
-            'Crimson Eclipse 🌹',
-            'Royal Sapphire 💙',
-            'Hyper Copper 🔥'
-        ];
-
+        const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
+        const themeNames = ['Emerald 🟢', 'Electric Cyan 🔵', 'Cyber Purple 🟣', 'Deep Ocean 💧', 'Solar Gold 🟡', 'Matrix Red 🔴'];
         let currentThemeIndex = 0;
 
         function switchTheme() {
@@ -1312,7 +1119,6 @@
                 document.documentElement.setAttribute('data-theme', theme);
             }
             document.getElementById('themeNameBtn').innerText = themeNames[currentThemeIndex];
-            if (snakeRunning) drawSnake();
         }
 
         function enterApp() {
@@ -1408,7 +1214,7 @@
         const snakeCanvas = document.getElementById('snakeCanvas');
         const sCtx = snakeCanvas.getContext('2d');
         const gridSize = 15;
-        const tileCount = snakeCanvas.width / gridSize;
+        const tileCount = snakeCanvas.width / gridSize; // 20x20
 
         let snake = [];
         let dir = { x: 1, y: 0 };
@@ -1478,11 +1284,13 @@
             dir = nextDir;
             const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
 
+            // الاصطدام بالجدران
             if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
                 endSnakeGame();
                 return;
             }
 
+            // الاصطدام بالجسم
             if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
                 endSnakeGame();
                 return;
@@ -1508,6 +1316,7 @@
         function drawSnake() {
             sCtx.clearRect(0, 0, snakeCanvas.width, snakeCanvas.height);
 
+            // شبكة خفيفة في الخلفية
             sCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
             sCtx.lineWidth = 1;
             for (let i = 1; i < tileCount; i++) {
@@ -1521,6 +1330,7 @@
                 sCtx.stroke();
             }
 
+            // رسم التفاحة / نقطة الطاقة
             sCtx.fillStyle = '#fbbf24';
             sCtx.beginPath();
             sCtx.arc(
@@ -1532,6 +1342,7 @@
             );
             sCtx.fill();
 
+            // رسم التعبان
             const primaryCol = getPrimaryColor();
             snake.forEach((seg, index) => {
                 sCtx.fillStyle = index === 0 ? '#ffffff' : primaryCol;
@@ -1547,10 +1358,101 @@
             });
         }
 
+        // تحكم الكيبورد والسحب (Swipe) للموبايل
         document.addEventListener('keydown', (e) => {
             if (!snakeRunning) return;
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
                 e.preventDefault();
             }
             if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') setSnakeDir(0, -1);
-            if 
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') setSnakeDir(0, 1);
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') setSnakeDir(-1, 0);
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') setSnakeDir(1, 0);
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        snakeCanvas.addEventListener('touchstart', (e) => {
+            if (!e.touches[0]) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        snakeCanvas.addEventListener('touchmove', (e) => {
+            if (!snakeRunning) return;
+            e.preventDefault();
+        }, { passive: false });
+
+        snakeCanvas.addEventListener('touchend', (e) => {
+            if (!snakeRunning || !e.changedTouches[0]) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+
+            if (Math.abs(dx) < 15 && Math.abs(dy) < 15) return;
+
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 0) setSnakeDir(1, 0);
+                else setSnakeDir(-1, 0);
+            } else {
+                if (dy > 0) setSnakeDir(0, 1);
+                else setSnakeDir(0, -1);
+            }
+        });
+
+        function startSolving() {
+            const code = document.getElementById('codeInput').value.trim();
+            const pass = document.getElementById('passInput').value.trim();
+
+            if (pass === '') {
+                alert('اكتب كلمة السر عشان نبدأ الحل!');
+                return;
+            }
+
+            const statusEl = document.getElementById('statusText');
+            const terminal = document.getElementById('terminalLog');
+
+            statusEl.innerText = 'يعمل الآن';
+            statusEl.style.color = 'var(--primary)';
+
+            terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
+
+            // بدء لعبة التعبان لو مش شغالة حالياً
+            if (!snakeRunning) {
+                startSnakeGame();
+            }
+
+            let currentChapter = 90001;
+            let completed = 0;
+
+            const interval = setInterval(() => {
+                completed++;
+                document.getElementById('lastChapter').innerText = currentChapter;
+                document.getElementById('completedCount').innerText = `${completed} / 42`;
+                terminal.innerHTML += `<div>> Chapter ${currentChapter}: syncing & auto-solving... Done!</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+
+                currentChapter++;
+
+                if (completed >= 42) {
+                    clearInterval(interval);
+                    statusEl.innerText = 'مكتمل بنجاح ✓';
+                    terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    launchConfetti();
+                    // اللعبة بتفضل مكملة ومش بتقف غير لما تخسر!
+                }
+            }, 300);
+        }
+
+        function copyNumber(num) {
+            navigator.clipboard.writeText(num);
+            const toast = document.getElementById('copyToast');
+            toast.innerText = 'تم نسخ الرقم: ' + num + ' ✓';
+            setTimeout(() => {
+                toast.innerText = 'اضغط على أي رقم لنسخه فوراً';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
