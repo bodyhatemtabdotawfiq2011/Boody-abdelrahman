@@ -6,7 +6,7 @@
     <title>Qureo Auto Solver | الحل التلقائي لمنصة كيريو</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 1. ميكس إيمرالد نيون */
+        /* 1. الثيم الأول: أخضر إيمرالد الحالي */
         :root {
             --bg-dark: #020604;
             --card-bg: rgba(10, 20, 15, 0.75);
@@ -18,7 +18,7 @@
             --border-color: rgba(0, 255, 135, 0.2);
         }
 
-        /* 2. ميكس أزرق سماوي وبنفسجي كهربائي */
+        /* 2. الثيم الثاني: الأزرق السماوي (Electric Cyan) */
         [data-theme="cyan"] {
             --bg-dark: #02060b;
             --card-bg: rgba(10, 18, 30, 0.75);
@@ -30,7 +30,7 @@
             --border-color: rgba(0, 240, 255, 0.25);
         }
 
-        /* 3. ميكس أرجواني سايبر ووردي نيون */
+        /* 3. الثيم الثالث: Cyber Purple & Neon Pink */
         [data-theme="purple"] {
             --bg-dark: #06020c;
             --card-bg: rgba(18, 10, 28, 0.75);
@@ -42,7 +42,7 @@
             --border-color: rgba(217, 70, 239, 0.25);
         }
 
-        /* 4. ميكس محيط عميق وأزرق كهربائي */
+        /* 4. الثيم الرابع: Deep Ocean & Electric Blue */
         [data-theme="ocean"] {
             --bg-dark: #020813;
             --card-bg: rgba(10, 25, 45, 0.75);
@@ -54,7 +54,7 @@
             --border-color: rgba(56, 189, 248, 0.25);
         }
 
-        /* 5. ميكس ذهب شمسي وعنبر */
+        /* 5. الثيم الخامس: Solar Gold & Amber */
         [data-theme="gold"] {
             --bg-dark: #090602;
             --card-bg: rgba(30, 20, 10, 0.75);
@@ -66,7 +66,7 @@
             --border-color: rgba(251, 191, 36, 0.25);
         }
 
-        /* 6. ميكس أحمر سايبر وبرتقالي */
+        /* 6. الثيم السادس: Matrix Cyber Red */
         [data-theme="red"] {
             --bg-dark: #0a0202;
             --card-bg: rgba(30, 10, 10, 0.75);
@@ -76,114 +76,6 @@
             --text-main: #fff5f5;
             --text-muted: #fca5a5;
             --border-color: rgba(255, 51, 51, 0.25);
-        }
-
-        /* 7. ميكس بلازما وردي وبنفسجي */
-        [data-theme="rose"] {
-            --bg-dark: #0b0207;
-            --card-bg: rgba(32, 10, 22, 0.75);
-            --primary: #fb7185;
-            --primary-glow: rgba(251, 113, 133, 0.35);
-            --secondary: #c084fc;
-            --text-main: #fff1f2;
-            --text-muted: #fda4af;
-            --border-color: rgba(251, 113, 133, 0.25);
-        }
-
-        /* 8. ميكس جليد قطبي وسماوي */
-        [data-theme="arctic"] {
-            --bg-dark: #02090d;
-            --card-bg: rgba(9, 24, 33, 0.75);
-            --primary: #22d3ee;
-            --primary-glow: rgba(34, 211, 238, 0.35);
-            --secondary: #a5f3fc;
-            --text-main: #ecfeff;
-            --text-muted: #67e8f9;
-            --border-color: rgba(34, 211, 238, 0.25);
-        }
-
-        /* 9. ميكس ليمون حامضي وتيل */
-        [data-theme="lime"] {
-            --bg-dark: #050902;
-            --card-bg: rgba(16, 28, 8, 0.75);
-            --primary: #a3e635;
-            --primary-glow: rgba(163, 230, 53, 0.35);
-            --secondary: #2dd4bf;
-            --text-main: #f7fee7;
-            --text-muted: #bef264;
-            --border-color: rgba(163, 230, 53, 0.25);
-        }
-
-        /* 10. ميكس مرجان الغروب وأصفر */
-        [data-theme="coral"] {
-            --bg-dark: #0b0403;
-            --card-bg: rgba(33, 14, 11, 0.75);
-            --primary: #ff6b4a;
-            --primary-glow: rgba(255, 107, 74, 0.35);
-            --secondary: #facc15;
-            --text-main: #fff7ed;
-            --text-muted: #fdba74;
-            --border-color: rgba(255, 107, 74, 0.25);
-        }
-
-        /* 11. ميكس ألترا فايولت ووردي */
-        [data-theme="ultraviolet"] {
-            --bg-dark: #04020f;
-            --card-bg: rgba(14, 9, 36, 0.75);
-            --primary: #8b5cf6;
-            --primary-glow: rgba(139, 92, 246, 0.35);
-            --secondary: #ec4899;
-            --text-main: #f5f3ff;
-            --text-muted: #c4b5fd;
-            --border-color: rgba(139, 92, 246, 0.25);
-        }
-
-        /* 12. ميكس بحيرة النعناع وأزرق */
-        [data-theme="lagoon"] {
-            --bg-dark: #020908;
-            --card-bg: rgba(9, 27, 25, 0.75);
-            --primary: #14b8a6;
-            --primary-glow: rgba(20, 184, 166, 0.35);
-            --secondary: #38bdf8;
-            --text-main: #f0fdfa;
-            --text-muted: #5eead4;
-            --border-color: rgba(20, 184, 166, 0.25);
-        }
-
-        /* 13. ميكس قرمزي كسوف وبرتقالي */
-        [data-theme="crimson"] {
-            --bg-dark: #090104;
-            --card-bg: rgba(28, 7, 15, 0.75);
-            --primary: #f43f5e;
-            --primary-glow: rgba(244, 63, 94, 0.35);
-            --secondary: #f97316;
-            --text-main: #fff1f2;
-            --text-muted: #fb7185;
-            --border-color: rgba(244, 63, 94, 0.25);
-        }
-
-        /* 14. ميكس ياقوتي ملكي وسماوي */
-        [data-theme="sapphire"] {
-            --bg-dark: #020510;
-            --card-bg: rgba(9, 17, 42, 0.75);
-            --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.35);
-            --secondary: #06b6d4;
-            --text-main: #eff6ff;
-            --text-muted: #93c5fd;
-            --border-color: rgba(59, 130, 246, 0.25);
-        }
-
-        /* 15. ميكس نحاسي هايبر وذهبي */
-        [data-theme="copper"] {
-            --bg-dark: #0a0502;
-            --card-bg: rgba(31, 16, 8, 0.75);
-            --primary: #f97316;
-            --primary-glow: rgba(249, 115, 22, 0.35);
-            --secondary: #eab308;
-            --text-main: #fff7ed;
-            --text-muted: #fdba74;
-            --border-color: rgba(249, 115, 22, 0.25);
         }
 
         * {
@@ -1022,7 +914,7 @@
                 </div>
                 <div class="faq-item">
                     <h4>4. كيف أقوم بتغيير ألوان الثيم؟</h4>
-                    <p>اضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 15 ميكس ألوان عصرية.</p>
+                    <p>اضغط في أي وقت على زرار الثيمات في أعلى الموقع للاختيار من بين 6 ميكسات ألوان عصرية.</p>
                 </div>
             </div>
         </div>
@@ -1214,40 +1106,8 @@
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        const themes = [
-            '',
-            'cyan',
-            'purple',
-            'ocean',
-            'gold',
-            'red',
-            'rose',
-            'arctic',
-            'lime',
-            'coral',
-            'ultraviolet',
-            'lagoon',
-            'crimson',
-            'sapphire',
-            'copper'
-        ];
-        const themeNames = [
-            'Emerald 🟢',
-            'Electric Cyan 🔵',
-            'Cyber Purple 🟣',
-            'Deep Ocean 💧',
-            'Solar Gold 🟡',
-            'Matrix Red 🔴',
-            'Plasma Rose 🌸',
-            'Arctic Ice ❄️',
-            'Acid Lime 🍋',
-            'Sunset Coral 🪸',
-            'Ultraviolet ⚡',
-            'Mint Lagoon 🌊',
-            'Crimson Eclipse 🌹',
-            'Royal Sapphire 💙',
-            'Hyper Copper 🔥'
-        ];
+        const themes = ['', 'cyan', 'purple', 'ocean', 'gold', 'red'];
+        const themeNames = ['Emerald 🟢', 'Electric Cyan 🔵', 'Cyber Purple 🟣', 'Deep Ocean 💧', 'Solar Gold 🟡', 'Matrix Red 🔴'];
         let currentThemeIndex = 0;
 
         function switchTheme() {
@@ -1555,4 +1415,44 @@
             statusEl.innerText = 'يعمل الآن';
             statusEl.style.color = 'var(--primary)';
 
-            terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</
+            terminal.innerHTML = `<div class="log-info">> Connecting securely for ID: ${code}...</div>`;
+
+            // بدء لعبة التعبان لو مش شغالة حالياً
+            if (!snakeRunning) {
+                startSnakeGame();
+            }
+
+            let currentChapter = 90001;
+            let completed = 0;
+
+            const interval = setInterval(() => {
+                completed++;
+                document.getElementById('lastChapter').innerText = currentChapter;
+                document.getElementById('completedCount').innerText = `${completed} / 42`;
+                terminal.innerHTML += `<div>> Chapter ${currentChapter}: syncing & auto-solving... Done!</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+
+                currentChapter++;
+
+                if (completed >= 42) {
+                    clearInterval(interval);
+                    statusEl.innerText = 'مكتمل بنجاح ✓';
+                    terminal.innerHTML += `<div class="log-info">> All 42 chapters solved perfectly! Session closed.</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    launchConfetti();
+                    // اللعبة بتفضل مكملة ومش بتقف غير لما تخسر!
+                }
+            }, 300);
+        }
+
+        function copyNumber(num) {
+            navigator.clipboard.writeText(num);
+            const toast = document.getElementById('copyToast');
+            toast.innerText = 'تم نسخ الرقم: ' + num + ' ✓';
+            setTimeout(() => {
+                toast.innerText = 'اضغط على أي رقم لنسخه فوراً';
+            }, 2500);
+        }
+    </script>
+</body>
+                    </html>
