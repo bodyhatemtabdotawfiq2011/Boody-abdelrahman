@@ -66,7 +66,7 @@
             font-size: clamp(1.75rem, 6vw, 2.35rem);
             font-weight: 800;
             line-height: 1.25;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             background: linear-gradient(90deg, var(--text), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -75,7 +75,7 @@
         .hero-sub {
             color: var(--muted);
             font-size: 0.98rem;
-            line-height: 1.65;
+            line-height: 1.7;
             margin-bottom: 26px;
         }
 
@@ -246,77 +246,6 @@
             box-shadow: 0 0 10px var(--glow);
         }
 
-        /* كروت الاختيارات */
-        .choice-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .choice-card:hover,
-        .choice-card.selected {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.045);
-            box-shadow: 0 0 0 1px var(--accent), 0 10px 24px rgba(0, 0, 0, 0.35);
-        }
-
-        .choice-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: var(--accent-ink);
-            font-weight: 800;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .choice-name {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
-
-        .choice-meta {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        .actions-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .actions-row .btn-primary {
-            flex: 2;
-        }
-
-        .actions-row .btn-secondary {
-            flex: 1;
-        }
-
-        /* قسم الألعاب والروابط */
-        #sub-view {
-            display: none;
-        }
-
         .item-row {
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid var(--border);
@@ -333,7 +262,18 @@
             border-color: var(--accent);
         }
 
-        .dl-btn {
+        .choice-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .choice-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .open-btn {
             padding: 9px 14px;
             border-radius: 10px;
             border: none;
@@ -345,8 +285,18 @@
             white-space: nowrap;
         }
 
-        .dl-btn:hover {
+        .open-btn:hover {
             filter: brightness(1.08);
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .actions-row .btn-secondary {
+            width: 100%;
         }
 
         /* مربع التواصل الفخم في الأسفل */
@@ -457,17 +407,17 @@
         <div class="hero-card">
             <h1 class="hero-title">مرحباً بكم في موقعنا</h1>
             <p class="hero-sub">
-                منصة أنيقة وسريعة تجمع أقسام الألعاب بروابط مباشرة والروابط السريعة في واجهة داكنة مريحة للعين.
+                منصة أنيقة وسريعة بواجهة داكنة مريحة للعين مع إمكانية تغيير الألوان بضغطة واحدة.
             </p>
 
             <div class="mini-stats">
                 <div class="stat-box">
-                    <span class="stat-label">الأقسام</span>
-                    <span class="stat-val">قسمين</span>
-                </div>
-                <div class="stat-box">
                     <span class="stat-label">السرعة</span>
                     <span class="stat-val">فوري</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">الواجهة</span>
+                    <span class="stat-val">20 ثيم</span>
                 </div>
             </div>
 
@@ -478,7 +428,7 @@
         </div>
     </section>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- المحتوى الرئيسي (قسم واحد فقط: الروابط السريعة) -->
     <main id="main-app" class="container">
         <div class="top-bar">
             <div class="brand-mini">لوحة الموقع</div>
@@ -488,58 +438,12 @@
             </div>
         </div>
 
-        <!-- كارت الاختيار الرئيسي -->
-        <div id="main-panel" class="panel">
+        <div class="panel">
             <div class="panel-head">
                 <span class="step-badge">01</span>
                 <div>
-                    <h2 class="panel-title">اختر القسم المطلوب</h2>
-                    <p class="panel-desc">خطوة سريعة للوصول إلى قسم الألعاب أو الروابط السريعة</p>
-                </div>
-            </div>
-
-            <div class="progress-track">
-                <div class="progress-seg active"></div>
-                <div class="progress-seg active"></div>
-                <div class="progress-seg"></div>
-                <div class="progress-seg"></div>
-            </div>
-
-            <div id="card-games" class="choice-card selected" onclick="selectChoice('games')">
-                <div class="choice-left">
-                    <div class="icon-box">🎮</div>
-                    <div>
-                        <div class="choice-name">قسم الألعاب</div>
-                        <div class="choice-meta">روابط مباشرة لتنزيل الألعاب المفضلة</div>
-                    </div>
-                </div>
-                <span style="color: var(--accent); font-weight: 700;">مختار</span>
-            </div>
-
-            <div id="card-links" class="choice-card" onclick="selectChoice('links')">
-                <div class="choice-left">
-                    <div class="icon-box">⚡</div>
-                    <div>
-                        <div class="choice-name">الروابط السريعة</div>
-                        <div class="choice-meta">وصول سريع لمواقع التصفح والخدمات اليومية</div>
-                    </div>
-                </div>
-                <span style="color: var(--muted); font-size: 0.85rem;">اختيار</span>
-            </div>
-
-            <div class="actions-row">
-                <button class="btn-primary" onclick="goToSelected()">التالي ←</button>
-                <button class="btn-secondary" onclick="backToWelcome()">الترحيب</button>
-            </div>
-        </div>
-
-        <!-- عرض تفاصيل القسم المختار -->
-        <div id="sub-view" class="panel">
-            <div class="panel-head">
-                <span id="sub-step" class="step-badge">02</span>
-                <div>
-                    <h2 id="sub-title" class="panel-title">قسم الألعاب</h2>
-                    <p id="sub-desc" class="panel-desc">قائمة الروابط المباشرة</p>
+                    <h2 class="panel-title">الروابط السريعة</h2>
+                    <p class="panel-desc">وصول سريع ومباشر إلى المواقع المفضلة</p>
                 </div>
             </div>
 
@@ -550,10 +454,10 @@
                 <div class="progress-seg active"></div>
             </div>
 
-            <div id="sub-items"></div>
+            <div id="links-list"></div>
 
             <div class="actions-row">
-                <button class="btn-secondary" onclick="backToMain()">رجوع للقائمة</button>
+                <button class="btn-secondary" onclick="backToWelcome()">العودة لشاشة الترحيب</button>
             </div>
         </div>
 
@@ -610,19 +514,28 @@
         ];
 
         let themeIndex = 0;
-        let selectedSection = 'games';
-
-        const gamesData = [
-            { title: "لعبة 1 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-1" },
-            { title: "لعبة 2 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-2" },
-            { title: "لعبة 3 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-3" }
-        ];
 
         const linksData = [
             { title: "YouTube", meta: "فتح موقع يوتيوب", url: "https://www.youtube.com" },
             { title: "TikTok", meta: "فتح موقع تيك توك", url: "https://www.tiktok.com" },
             { title: "Google", meta: "بحث جوجل السريع", url: "https://www.google.com" }
         ];
+
+        function renderLinks() {
+            const listEl = document.getElementById('links-list');
+            listEl.innerHTML = '';
+            linksData.forEach(item => {
+                listEl.innerHTML += `
+                    <div class="item-row">
+                        <div>
+                            <div class="choice-name">${item.title}</div>
+                            <div class="choice-meta">${item.meta}</div>
+                        </div>
+                        <a class="open-btn" href="${item.url}" target="_blank" rel="noopener">فتح الرابط</a>
+                    </div>
+                `;
+            });
+        }
 
         function applyTheme(idx) {
             const t = themes[idx];
@@ -646,79 +559,11 @@
         function openApp() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
-            backToMain();
         }
 
         function backToWelcome() {
             document.getElementById('main-app').style.display = 'none';
             document.getElementById('welcome-screen').style.display = 'flex';
-        }
-
-        function selectChoice(type) {
-            selectedSection = type;
-            const gCard = document.getElementById('card-games');
-            const lCard = document.getElementById('card-links');
-
-            if (type === 'games') {
-                gCard.classList.add('selected');
-                lCard.classList.remove('selected');
-                gCard.lastElementChild.textContent = 'مختار';
-                gCard.lastElementChild.style.color = 'var(--accent)';
-                lCard.lastElementChild.textContent = 'اختيار';
-                lCard.lastElementChild.style.color = 'var(--muted)';
-            } else {
-                lCard.classList.add('selected');
-                gCard.classList.remove('selected');
-                lCard.lastElementChild.textContent = 'مختار';
-                lCard.lastElementChild.style.color = 'var(--accent)';
-                gCard.lastElementChild.textContent = 'اختيار';
-                gCard.lastElementChild.style.color = 'var(--muted)';
-            }
-        }
-
-        function goToSelected() {
-            document.getElementById('main-panel').style.display = 'none';
-            document.getElementById('sub-view').style.display = 'block';
-
-            const titleEl = document.getElementById('sub-title');
-            const descEl = document.getElementById('sub-desc');
-            const listEl = document.getElementById('sub-items');
-            listEl.innerHTML = '';
-
-            if (selectedSection === 'games') {
-                titleEl.textContent = 'قسم الألعاب';
-                descEl.textContent = 'ضع روابط التحميل المباشرة الخاصة بك في مصفوفة gamesData';
-                gamesData.forEach(item => {
-                    listEl.innerHTML += `
-                        <div class="item-row">
-                            <div>
-                                <div class="choice-name">${item.title}</div>
-                                <div class="choice-meta">${item.meta}</div>
-                            </div>
-                            <a class="dl-btn" href="${item.url}" target="_blank" rel="noopener">تحميل مباشر</a>
-                        </div>
-                    `;
-                });
-            } else {
-                titleEl.textContent = 'الروابط السريعة';
-                descEl.textContent = 'روابط تفتح في تبويب جديد بضغطة واحدة';
-                linksData.forEach(item => {
-                    listEl.innerHTML += `
-                        <div class="item-row">
-                            <div>
-                                <div class="choice-name">${item.title}</div>
-                                <div class="choice-meta">${item.meta}</div>
-                            </div>
-                            <a class="dl-btn" href="${item.url}" target="_blank" rel="noopener">فتح الرابط</a>
-                        </div>
-                    `;
-                });
-            }
-        }
-
-        function backToMain() {
-            document.getElementById('sub-view').style.display = 'none';
-            document.getElementById('main-panel').style.display = 'block';
         }
 
         function copyPhone(phone, btn) {
@@ -730,6 +575,7 @@
             }, 1400);
         }
 
+        renderLinks();
         applyTheme(0);
     </script>
 </body>
