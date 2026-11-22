@@ -3,236 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الشخصي</title>
+    <title>مرحباً بكم في موقعنا</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-            --accent: #38bdf8;
+            --bg-top: #071b14;
+            --bg-bottom: #06090c;
+            --surface: #0e141b;
+            --surface-soft: #131b24;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #f3f6f9;
+            --muted: #94a3b8;
+            --accent: #10b981;
+            --accent-2: #06b6d4;
+            --accent-ink: #04130e;
+            --glow: rgba(16, 185, 129, 0.35);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            transition: background 0.35s ease, background-color 0.35s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
             min-height: 100vh;
+            color: var(--text);
+            background: radial-gradient(circle at 50% -10%, var(--bg-top) 0%, var(--bg-bottom) 62%);
+            background-attachment: fixed;
+            padding: 24px 16px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        /* شارة الحالة العلوية */
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        /* شاشة الترحيب الفخمة */
+        #welcome-screen {
+            min-height: 82vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        /* شاشة الترحيب */
-        #welcome-screen {
             text-align: center;
-            max-width: 500px;
         }
 
-        #welcome-screen h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        .hero-card {
+            width: 100%;
+            background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 36px 24px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-title {
+            font-size: clamp(1.75rem, 6vw, 2.35rem);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, var(--text), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            margin-bottom: 26px;
+        }
+
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px 8px;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-size: 0.95rem;
+            font-weight: 700;
             color: var(--accent);
         }
 
-        #welcome-screen p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .btn {
-            background-color: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            opacity: 0.85;
-            transform: scale(1.03);
-        }
-
-        /* المحتوى الرئيسي */
-        #main-content {
-            display: none;
+        /* الأزرار */
+        .btn-primary {
             width: 100%;
-            max-width: 800px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 22px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--accent-ink);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 10px 28px var(--glow);
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: center;
+            gap: 8px;
         }
 
-        .grid {
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text);
+            background: var(--surface-soft);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* الصفحة الرئيسية */
+        #main-app {
+            display: none;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .brand-mini {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--accent);
+        }
+
+        .theme-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-chip {
+            font-size: 0.78rem;
+            color: var(--muted);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 7px 11px;
+            border-radius: 10px;
+        }
+
+        .panel {
+            background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .panel-head {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .step-badge {
+            min-width: 34px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: var(--accent-ink);
+            font-weight: 800;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .panel-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* شريط التقدم المقسم */
+        .progress-track {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 18px;
         }
 
-        .card {
-            background-color: var(--card);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid transparent;
+        .progress-seg {
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .card:hover {
+        .progress-seg.active {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        /* كروت الاختيارات */
+        .choice-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .choice-card:hover,
+        .choice-card.selected {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.045);
+            box-shadow: 0 0 0 1px var(--accent), 0 10px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .choice-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: var(--accent-ink);
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .choice-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .choice-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .actions-row .btn-primary {
+            flex: 2;
+        }
+
+        .actions-row .btn-secondary {
+            flex: 1;
+        }
+
+        /* قسم الألعاب والروابط */
+        #sub-view {
+            display: none;
+        }
+
+        .item-row {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .item-row:hover {
             border-color: var(--accent);
         }
 
-        .card h2 {
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-
-        .card p {
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        /* قسم الألعاب */
-        #games-section {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .game-item {
-            background-color: var(--card);
-            padding: 15px 20px;
+        .dl-btn {
+            padding: 9px 14px;
             border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: var(--accent-ink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .dl-btn:hover {
+            filter: brightness(1.08);
         }
     </style>
 </head>
 <body>
 
     <!-- شاشة الترحيب -->
-    <div id="welcome-screen">
-        <h1>أهلاً بيك في موقعي! 👋</h1>
-        <p>مكانك المفضل لتحميل الألعاب الخفيفة والوصول السريع لأهم الروابط.</p>
-        <button class="btn" onclick="enterSite()">اضغط للدخول</button>
-    </div>
+    <section id="welcome-screen" class="container">
+        <div class="hero-card">
+            <div style="display:flex; justify-content:center;">
+                <div class="pill-badge">
+                    <span class="dot"></span>
+                    <span>واجهة سريعة • تصميم متجدد • 20 ثيم</span>
+                </div>
+            </div>
+
+            <h1 class="hero-title">مرحباً بكم في موقعنا</h1>
+            <p class="hero-sub">
+                منصة أنيقة وسريعة تجمع أقسام الألعاب بروابط مباشرة والروابط السريعة في واجهة داكنة مريحة للعين مع إمكانية تغيير الألوان بضغطة واحدة.
+            </p>
+
+            <div class="mini-stats">
+                <div class="stat-box">
+                    <span class="stat-label">الألوان</span>
+                    <span class="stat-val">20 ميكس</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">الأقسام</span>
+                    <span class="stat-val">قسمين</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">السرعة</span>
+                    <span class="stat-val">فوري</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="openApp()">
+                <span>اضغط للدخول</span>
+                <span>←</span>
+            </button>
+        </div>
+    </section>
 
     <!-- المحتوى الرئيسي -->
-    <div id="main-content">
-        <header>
-            <h3>لوحة التحكم</h3>
-            <div>
-                <span id="theme-name" style="margin-left: 10px; font-size: 0.9rem; opacity: 0.8;">ثيم 1/20</span>
-                <button class="btn" style="padding: 8px 16px; font-size: 0.9rem;" onclick="changeTheme()">تغيير الألوان 🎨</button>
-            </div>
-        </header>
-
-        <!-- الاختيارين الرئيسيين -->
-        <div class="grid" id="choices-grid">
-            <div class="card">
-                <h2>🎮 قسم الألعاب</h2>
-                <p>مجموعة ألعاب مختارة بروابط تحميل مباشرة وسريعة.</p>
-                <button class="btn" onclick="showGames()">دخول القسم</button>
-            </div>
-
-            <div class="card">
-                <h2>📚 روابط سريعة</h2>
-                <p>أهم المواقع والأدوات اللي بستخدمها يومياً في مكان واحد.</p>
-                <a href="https://www.google.com" target="_blank" class="btn">فتح الروابط</a>
+    <main id="main-app" class="container">
+        <div class="top-bar">
+            <div class="brand-mini">✦ لوحة الموقع</div>
+            <div class="theme-controls">
+                <span id="theme-indicator" class="theme-chip">ثيم 1/20 • زمردي ليلي</span>
+                <button class="btn-secondary" onclick="cycleTheme()">🎨 تغيير الألوان</button>
             </div>
         </div>
 
-        <!-- قائمة الألعاب (بتظهر لما تدوس على قسم الألعاب) -->
-        <div id="games-section">
-            <button class="btn" style="margin-bottom: 20px; padding: 8px 15px; font-size: 0.9rem;" onclick="backToMain()">🔙 رجوع</button>
-            <h2 style="margin-bottom: 15px; color: var(--accent);">قائمة الألعاب المتاحة:</h2>
-            
-            <div class="game-item">
-                <span>لعبة 1 (حط الاسم هنا)</span>
-                <a href="ضع_رابط_التحميل_هنا" class="btn" style="padding: 6px 15px; font-size: 0.9rem;">تحميل مباشر</a>
+        <!-- كارت الاختيار الرئيسي -->
+        <div id="main-panel" class="panel">
+            <div class="panel-head">
+                <span class="step-badge">01</span>
+                <div>
+                    <h2 class="panel-title">اختر القسم المطلوب</h2>
+                    <p class="panel-desc">خطوة سريعة للوصول إلى قسم الألعاب أو الروابط السريعة</p>
+                </div>
             </div>
 
-            <div class="game-item">
-                <span>لعبة 2 (حط الاسم هنا)</span>
-                <a href="ضع_رابط_التحميل_هنا" class="btn" style="padding: 6px 15px; font-size: 0.9rem;">تحميل مباشر</a>
+            <div class="progress-track">
+                <div class="progress-seg active"></div>
+                <div class="progress-seg active"></div>
+                <div class="progress-seg"></div>
+                <div class="progress-seg"></div>
+            </div>
+
+            <div id="card-games" class="choice-card selected" onclick="selectChoice('games')">
+                <div class="choice-left">
+                    <div class="icon-box">🎮</div>
+                    <div>
+                        <div class="choice-name">قسم الألعاب</div>
+                        <div class="choice-meta">روابط مباشرة لتنزيل الألعاب المفضلة</div>
+                    </div>
+                </div>
+                <span style="color: var(--accent); font-weight: 700;">مختار</span>
+            </div>
+
+            <div id="card-links" class="choice-card" onclick="selectChoice('links')">
+                <div class="choice-left">
+                    <div class="icon-box">⚡</div>
+                    <div>
+                        <div class="choice-name">الروابط السريعة</div>
+                        <div class="choice-meta">وصول سريع لمواقع التصفح والخدمات اليومية</div>
+                    </div>
+                </div>
+                <span style="color: var(--muted); font-size: 0.85rem;">اختيار</span>
+            </div>
+
+            <div class="actions-row">
+                <button class="btn-primary" onclick="goToSelected()">التالي ←</button>
+                <button class="btn-secondary" onclick="backToWelcome()">الترحيب</button>
             </div>
         </div>
-    </div>
+
+        <!-- عرض تفاصيل القسم المختار -->
+        <div id="sub-view" class="panel">
+            <div class="panel-head">
+                <span id="sub-step" class="step-badge">02</span>
+                <div>
+                    <h2 id="sub-title" class="panel-title">قسم الألعاب</h2>
+                    <p id="sub-desc" class="panel-desc">قائمة الروابط المباشرة</p>
+                </div>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-seg active"></div>
+                <div class="progress-seg active"></div>
+                <div class="progress-seg active"></div>
+                <div class="progress-seg active"></div>
+            </div>
+
+            <div id="sub-items"></div>
+
+            <div class="actions-row">
+                <button class="btn-secondary" onclick="backToMain()">رجوع للقائمة</button>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // 20 ميكس ألوان مختلف
+        // 20 ميكس ألوان متنوعة وجذابة
         const themes = [
-            { bg: '#0f172a', card: '#1e293b', text: '#f8fafc', accent: '#38bdf8' }, // 1. أزرق ليلي
-            { bg: '#18181b', card: '#27272a', text: '#fafafa', accent: '#f43f5e' }, // 2. فحمي ووردي
-            { bg: '#090d16', card: '#111827', text: '#f3f4f6', accent: '#10b981' }, // 3. ماتريكس أخضر
-            { bg: '#1e1b4b', card: '#312e81', text: '#eef2ff', accent: '#f59e0b' }, // 4. نيلي وذهبي
-            { bg: '#27131a', card: '#3f1d28', text: '#fff1f2', accent: '#fb7185' }, // 5. عنابي ناعم
-            { bg: '#0c0a09', card: '#1c1917', text: '#fafaf9', accent: '#ea580c' }, // 6. برتقالي ناري
-            { bg: '#042f2e', card: '#115e59', text: '#f0fdfa', accent: '#2dd4bf' }, // 7. تركواز غامق
-            { bg: '#171717', card: '#262626', text: '#ffffff', accent: '#a855f7' }, // 8. بنفسجي نيون
-            { bg: '#1a2e05', card: '#365314', text: '#f7fee7', accent: '#a3e635' }, // 9. ليموني وغابات
-            { bg: '#2e1065', card: '#4c1d95', text: '#f5f3ff', accent: '#e879f9' }, // 10. سايبربانك
-            { bg: '#082f49', card: '#0369a1', text: '#f0f9ff', accent: '#fde047' }, // 11. محيطي وأصفر
-            { bg: '#3f2e3e', card: '#331d2c', text: '#efe1d1', accent: '#a78295' }, // 12. كلاسيكي دافئ
-            { bg: '#1b262c', card: '#0f4c75', text: '#bbe1fa', accent: '#3282b8' }, // 13. أزرق ملكي
-            { bg: '#222831', card: '#393e46', text: '#eeeeee', accent: '#00adb5' }, // 14. رمادي وسيان
-            { bg: '#1a1a2e', card: '#16213e', text: '#e94560', accent: '#0f3460' }, // 15. دراكولا
-            { bg: '#2b2d42', card: '#8d99ae', text: '#edf2f4', accent: '#ef233c' }, // 16. أحمر ورمادي
-            { bg: '#14213d', card: '#000000', text: '#ffffff', accent: '#fca311' }, // 17. أسود وذهبي
-            { bg: '#2d3142', card: '#4f5d75', text: '#ffffff', accent: '#ef8354' }, // 18. مرجاني
-            { bg: '#111111', card: '#222222', text: '#e0e0e0', accent: '#00ff88' }, // 19. جيمنج أخضر
-            { bg: '#1f1d36', card: '#3f3351', text: '#e9a6a6', accent: '#864879' }  // 20. غروب الشمس
+            { name: "زمردي ليلي", bgTop: "#071b14", bgBot: "#06090c", surface: "#0e141b", soft: "#131b24", accent: "#10b981", accent2: "#06b6d4", ink: "#04130e", glow: "rgba(16, 185, 129, 0.35)" },
+            { name: "نيون سيبراني", bgTop: "#1a0b2e", bgBot: "#07060d", surface: "#120f24", soft: "#1a1633", accent: "#e879f9", accent2: "#38bdf8", ink: "#1b0422", glow: "rgba(232, 121, 249, 0.35)" },
+            { name: "غروب ذهبي", bgTop: "#271306", bgBot: "#090706", surface: "#17110d", soft: "#221812", accent: "#f59e0b", accent2: "#ef4444", ink: "#1f1202", glow: "rgba(245, 158, 11, 0.35)" },
+            { name: "محيط أزرق", bgTop: "#061d30", bgBot: "#05080d", surface: "#0c1521", soft: "#121f30", accent: "#38bdf8", accent2: "#2dd4bf", ink: "#031521", glow: "rgba(56, 189, 248, 0.35)" },
+            { name: "قرمزي ملكي", bgTop: "#290916", bgBot: "#090507", surface: "#190d13", soft: "#24121b", accent: "#fb7185", accent2: "#f97316", ink: "#24040e", glow: "rgba(251, 113, 133, 0.35)" },
+            { name: "ليموني داكن", bgTop: "#172407", bgBot: "#070805", surface: "#11160c", soft: "#192111", accent: "#a3e635", accent2: "#10b981", ink: "#142102", glow: "rgba(163, 230, 53, 0.35)" },
+            { name: "بنفسجي عميق", bgTop: "#171036", bgBot: "#06050c", surface: "#100e22", soft: "#181533", accent: "#a78bfa", accent2: "#f472b6", ink: "#140b2e", glow: "rgba(167, 139, 250, 0.35)" },
+            { name: "مرجاني دافئ", bgTop: "#2b100b", bgBot: "#080605", surface: "#19100e", soft: "#241613", accent: "#ff6b6b", accent2: "#ffd166", ink: "#240704", glow: "rgba(255, 107, 107, 0.35)" },
+            { name: "تركواز جليدي", bgTop: "#052424", bgBot: "#050808", surface: "#0b1617", soft: "#102122", accent: "#2dd4bf", accent2: "#60a5fa", ink: "#021c1a", glow: "rgba(45, 212, 191, 0.35)" },
+            { name: "عنبر ونحاس", bgTop: "#241407", bgBot: "#080605", surface: "#17110c", soft: "#221811", accent: "#fb923c", accent2: "#facc15", ink: "#210e02", glow: "rgba(251, 146, 60, 0.35)" },
+            { name: "وردي نيون", bgTop: "#2b0b22", bgBot: "#090508", surface: "#190d16", soft: "#241220", accent: "#f472b6", accent2: "#c084fc", ink: "#24041a", glow: "rgba(244, 114, 182, 0.35)" },
+            { name: "نعناعي حديث", bgTop: "#062419", bgBot: "#050807", surface: "#0c1713", soft: "#11221c", accent: "#34d399", accent2: "#a3e635", ink: "#031d13", glow: "rgba(52, 211, 153, 0.35)" },
+            { name: "أزرق كهربائي", bgTop: "#081436", bgBot: "#05060c", surface: "#0d1224", soft: "#131a33", accent: "#60a5fa", accent2: "#818cf8", ink: "#05102b", glow: "rgba(96, 165, 250, 0.35)" },
+            { name: "ذهبي فرعوني", bgTop: "#241d06", bgBot: "#080704", surface: "#17140b", soft: "#221d10", accent: "#eab308", accent2: "#f59e0b", ink: "#1f1802", glow: "rgba(234, 179, 8, 0.35)" },
+            { name: "أحمر بركاني", bgTop: "#2b0808", bgBot: "#090505", surface: "#190c0c", soft: "#241111", accent: "#ef4444", accent2: "#fb923c", ink: "#240303", glow: "rgba(239, 68, 68, 0.35)" },
+            { name: "سماوي مشرق", bgTop: "#06212e", bgBot: "#05080b", surface: "#0c161d", soft: "#11202a", accent: "#22d3ee", accent2: "#38bdf8", ink: "#031a24", glow: "rgba(34, 211, 238, 0.35)" },
+            { name: "أرجواني ملكي", bgTop: "#1f0930", bgBot: "#07050b", surface: "#140c21", soft: "#1d1130", accent: "#c084fc", accent2: "#e879f9", ink: "#190529", glow: "rgba(192, 132, 252, 0.35)" },
+            { name: "أخضر غابات", bgTop: "#092111", bgBot: "#050806", surface: "#0e1711", soft: "#142118", accent: "#4ade80", accent2: "#2dd4bf", ink: "#041c0c", glow: "rgba(74, 222, 128, 0.35)" },
+            { name: "برتقالي غروب", bgTop: "#291206", bgBot: "#090604", surface: "#18100c", soft: "#231711", accent: "#f97316", accent2: "#fb7185", ink: "#210c02", glow: "rgba(249, 115, 22, 0.35)" },
+            { name: "فضي وسيان", bgTop: "#0b1e26", bgBot: "#06080a", surface: "#10161c", soft: "#172028", accent: "#67e8f9", accent2: "#cbd5e1", ink: "#041820", glow: "rgba(103, 232, 249, 0.35)" }
         ];
 
-        let currentTheme = 0;
+        let themeIndex = 0;
+        let selectedSection = 'games';
 
-        function enterSite() {
+        const gamesData = [
+            { title: "لعبة 1 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-1" },
+            { title: "لعبة 2 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-2" },
+            { title: "لعبة 3 — عدّل الاسم هنا", meta: "رابط تحميل مباشر", url: "#game-link-3" }
+        ];
+
+        const linksData = [
+            { title: "YouTube", meta: "فتح موقع يوتيوب", url: "https://www.youtube.com" },
+            { title: "TikTok", meta: "فتح موقع تيك توك", url: "https://www.tiktok.com" },
+            { title: "Google", meta: "بحث جوجل السريع", url: "https://www.google.com" }
+        ];
+
+        function applyTheme(idx) {
+            const t = themes[idx];
+            const r = document.documentElement.style;
+            r.setProperty('--bg-top', t.bgTop);
+            r.setProperty('--bg-bottom', t.bgBot);
+            r.setProperty('--surface', t.surface);
+            r.setProperty('--surface-soft', t.soft);
+            r.setProperty('--accent', t.accent);
+            r.setProperty('--accent-2', t.accent2);
+            r.setProperty('--accent-ink', t.ink);
+            r.setProperty('--glow', t.glow);
+            document.getElementById('theme-indicator').textContent = `ثيم ${idx + 1}/20 • ${t.name}`;
+        }
+
+        function cycleTheme() {
+            themeIndex = (themeIndex + 1) % themes.length;
+            applyTheme(themeIndex);
+        }
+
+        function openApp() {
             document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('main-app').style.display = 'block';
+            backToMain();
         }
 
-        function changeTheme() {
-            currentTheme = (currentTheme + 1) % themes.length;
-            const theme = themes[currentTheme];
-            const root = document.documentElement;
-            
-            root.style.setProperty('--bg', theme.bg);
-            root.style.setProperty('--card', theme.card);
-            root.style.setProperty('--text', theme.text);
-            root.style.setProperty('--accent', theme.accent);
-            
-            document.getElementById('theme-name').innerText = `ثيم ${currentTheme + 1}/20`;
+        function backToWelcome() {
+            document.getElementById('main-app').style.display = 'none';
+            document.getElementById('welcome-screen').style.display = 'flex';
         }
 
-        function showGames() {
-            document.getElementById('choices-grid').style.display = 'none';
-            document.getElementById('games-section').style.display = 'block';
+        function selectChoice(type) {
+            selectedSection = type;
+            const gCard = document.getElementById('card-games');
+            const lCard = document.getElementById('card-links');
+
+            if (type === 'games') {
+                gCard.classList.add('selected');
+                lCard.classList.remove('selected');
+                gCard.lastElementChild.textContent = 'مختار';
+                gCard.lastElementChild.style.color = 'var(--accent)';
+                lCard.lastElementChild.textContent = 'اختيار';
+                lCard.lastElementChild.style.color = 'var(--muted)';
+            } else {
+                lCard.classList.add('selected');
+                gCard.classList.remove('selected');
+                lCard.lastElementChild.textContent = 'مختار';
+                lCard.lastElementChild.style.color = 'var(--accent)';
+                gCard.lastElementChild.textContent = 'اختيار';
+                gCard.lastElementChild.style.color = 'var(--muted)';
+            }
+        }
+
+        function goToSelected() {
+            document.getElementById('main-panel').style.display = 'none';
+            document.getElementById('sub-view').style.display = 'block';
+
+            const titleEl = document.getElementById('sub-title');
+            const descEl = document.getElementById('sub-desc');
+            const listEl = document.getElementById('sub-items');
+            listEl.innerHTML = '';
+
+            if (selectedSection === 'games') {
+                titleEl.textContent = 'قسم الألعاب';
+                descEl.textContent = 'ضع روابط التحميل المباشرة الخاصة بك في مصفوفة gamesData';
+                gamesData.forEach(item => {
+                    listEl.innerHTML += `
+                        <div class="item-row">
+                            <div>
+                                <div class="choice-name">${item.title}</div>
+                                <div class="choice-meta">${item.meta}</div>
+                            </div>
+                            <a class="dl-btn" href="${item.url}" target="_blank" rel="noopener">تحميل مباشر</a>
+                        </div>
+                    `;
+                });
+            } else {
+                titleEl.textContent = 'الروابط السريعة';
+                descEl.textContent = 'روابط تفتح في تبويب جديد بضغطة واحدة';
+                linksData.forEach(item => {
+                    listEl.innerHTML += `
+                        <div class="item-row">
+                            <div>
+                                <div class="choice-name">${item.title}</div>
+                                <div class="choice-meta">${item.meta}</div>
+                            </div>
+                            <a class="dl-btn" href="${item.url}" target="_blank" rel="noopener">فتح الرابط</a>
+                        </div>
+                    `;
+                });
+            }
         }
 
         function backToMain() {
-            document.getElementById('games-section').style.display = 'none';
-            document.getElementById('choices-grid').style.display = 'grid';
+            document.getElementById('sub-view').style.display = 'none';
+            document.getElementById('main-panel').style.display = 'block';
         }
+
+        applyTheme(0);
     </script>
 </body>
 </html>
