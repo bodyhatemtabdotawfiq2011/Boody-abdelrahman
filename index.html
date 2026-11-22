@@ -246,6 +246,68 @@
             box-shadow: 0 0 10px var(--glow);
         }
 
+        /* كارت الاختيار */
+        .choice-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .choice-card.selected {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.045);
+            box-shadow: 0 0 0 1px var(--accent), 0 10px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .choice-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: var(--accent-ink);
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .choice-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .choice-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .selected-tag {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        /* عرض قائمة الروابط بعد الضغط على اختر */
+        #links-panel {
+            display: none;
+        }
+
         .item-row {
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid var(--border);
@@ -260,17 +322,6 @@
 
         .item-row:hover {
             border-color: var(--accent);
-        }
-
-        .choice-name {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
-
-        .choice-meta {
-            font-size: 0.8rem;
-            color: var(--muted);
         }
 
         .open-btn {
@@ -295,8 +346,12 @@
             margin-top: 16px;
         }
 
+        .actions-row .btn-primary {
+            flex: 2;
+        }
+
         .actions-row .btn-secondary {
-            width: 100%;
+            flex: 1;
         }
 
         /* مربع التواصل الفخم في الأسفل */
@@ -424,7 +479,7 @@
         </div>
     </section>
 
-    <!-- المحتوى الرئيسي (قسم واحد فقط: الروابط السريعة) -->
+    <!-- المحتوى الرئيسي -->
     <main id="main-app" class="container">
         <div class="top-bar">
             <div class="brand-mini">لوحة الموقع</div>
@@ -434,11 +489,46 @@
             </div>
         </div>
 
-        <div class="panel">
+        <!-- خطوة الاختيار: اختيار روابط سريعة والضغط على اختر -->
+        <div id="selector-panel" class="panel">
             <div class="panel-head">
                 <span class="step-badge">01</span>
                 <div>
-                    <h2 class="panel-title">الروابط السريعة</h2>
+                    <h2 class="panel-title">اختر من القائمة</h2>
+                    <p class="panel-desc">حدد الخيار ثم اضغط على زر اختر للدخول</p>
+                </div>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-seg active"></div>
+                <div class="progress-seg active"></div>
+                <div class="progress-seg"></div>
+                <div class="progress-seg"></div>
+            </div>
+
+            <div id="quick-links-card" class="choice-card selected" onclick="toggleQuickSelect()">
+                <div class="choice-left">
+                    <div class="icon-box">⚡</div>
+                    <div>
+                        <div class="choice-name">روابط سريعة</div>
+                        <div class="choice-meta">قائمة الروابط المباشرة والوصول السريع</div>
+                    </div>
+                </div>
+                <span id="select-status" class="selected-tag">محدد</span>
+            </div>
+
+            <div class="actions-row">
+                <button class="btn-primary" onclick="confirmSelection()">اختر ←</button>
+                <button class="btn-secondary" onclick="backToWelcome()">الترحيب</button>
+            </div>
+        </div>
+
+        <!-- عرض الروابط السريعة بعد الضغط على اختر -->
+        <div id="links-panel" class="panel">
+            <div class="panel-head">
+                <span class="step-badge">02</span>
+                <div>
+                    <h2 class="panel-title">روابط سريعة</h2>
                     <p class="panel-desc">وصول سريع ومباشر إلى المواقع المفضلة</p>
                 </div>
             </div>
@@ -453,7 +543,7 @@
             <div id="links-list"></div>
 
             <div class="actions-row">
-                <button class="btn-secondary" onclick="backToWelcome()">العودة لشاشة الترحيب</button>
+                <button class="btn-secondary" onclick="backToSelector()">رجوع للاختيار</button>
             </div>
         </div>
 
@@ -510,6 +600,7 @@
         ];
 
         let themeIndex = 0;
+        let isQuickSelected = true;
 
         const linksData = [
             { title: "YouTube", meta: "فتح موقع يوتيوب", url: "https://www.youtube.com" },
@@ -555,11 +646,40 @@
         function openApp() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
+            backToSelector();
         }
 
         function backToWelcome() {
             document.getElementById('main-app').style.display = 'none';
             document.getElementById('welcome-screen').style.display = 'flex';
+        }
+
+        function toggleQuickSelect() {
+            isQuickSelected = !isQuickSelected;
+            const card = document.getElementById('quick-links-card');
+            const status = document.getElementById('select-status');
+            if (isQuickSelected) {
+                card.classList.add('selected');
+                status.textContent = 'محدد';
+                status.style.color = 'var(--accent)';
+            } else {
+                card.classList.remove('selected');
+                status.textContent = 'غير محدد';
+                status.style.color = 'var(--muted)';
+            }
+        }
+
+        function confirmSelection() {
+            if (!isQuickSelected) {
+                toggleQuickSelect();
+            }
+            document.getElementById('selector-panel').style.display = 'none';
+            document.getElementById('links-panel').style.display = 'block';
+        }
+
+        function backToSelector() {
+            document.getElementById('links-panel').style.display = 'none';
+            document.getElementById('selector-panel').style.display = 'block';
         }
 
         function copyPhone(phone, btn) {
