@@ -424,8 +424,6 @@
             font-size: 0.95rem;
             color: var(--text);
             margin-bottom: 3px;
-            direction: ltr;
-            text-align: right;
         }
 
         .member-phone {
@@ -433,8 +431,6 @@
             font-weight: 600;
             color: var(--accent);
             letter-spacing: 0.4px;
-            direction: ltr;
-            text-align: right;
         }
 
         .copy-btn {
@@ -547,7 +543,7 @@
             </div>
         </div>
 
-        <!-- مربع التواصل معنا في الأسفل -->
+        <!-- مربع التواصل معنا في الأسفل (عدّل النصوص والأرقام هنا كما تحب) -->
         <footer class="contact-box">
             <div class="contact-header">
                 <span class="contact-title">للتواصل معنا</span>
@@ -557,18 +553,18 @@
             <div class="contact-grid">
                 <div class="member-card">
                     <div>
-                        <div class="member-name">Abdelrahman Hatem</div>
-                        <div class="member-phone">01557391031</div>
+                        <div class="member-name">اكتب الاسم هنا</div>
+                        <div class="member-phone">اكتب الرقم هنا</div>
                     </div>
-                    <button class="copy-btn" onclick="copyPhone('01557391031', this)">نسخ الرقم</button>
+                    <button class="copy-btn" onclick="copyPhone('اكتب الرقم هنا', this)">نسخ الرقم</button>
                 </div>
 
                 <div class="member-card">
                     <div>
-                        <div class="member-name">Medhat Abdelbaky</div>
-                        <div class="member-phone">01060761957</div>
+                        <div class="member-name">اكتب الاسم هنا</div>
+                        <div class="member-phone">اكتب الرقم هنا</div>
                     </div>
-                    <button class="copy-btn" onclick="copyPhone('01060761957', this)">نسخ الرقم</button>
+                    <button class="copy-btn" onclick="copyPhone('اكتب الرقم هنا', this)">نسخ الرقم</button>
                 </div>
             </div>
         </footer>
@@ -605,7 +601,14 @@
         const linksData = [
             { title: "YouTube", meta: "فتح موقع يوتيوب", url: "https://www.youtube.com" },
             { title: "TikTok", meta: "فتح موقع تيك توك", url: "https://www.tiktok.com" },
-            { title: "Google", meta: "بحث جوجل السريع", url: "https://www.google.com" }
+            { title: "Google", meta: "بحث جوجل السريع", url: "https://www.google.com" },
+            { title: "Gemini", meta: "فتح مساعد جيميناي", url: "https://gemini.google.com" },
+            { title: "ChatGPT", meta: "فتح شات جي بي تي", url: "https://chatgpt.com" },
+            { title: "Instagram", meta: "فتح موقع انستجرام", url: "https://www.instagram.com" },
+            { title: "Telegram", meta: "فتح تليجرام ويب", url: "https://t.me" },
+            { title: "Facebook", meta: "فتح موقع فيسبوك", url: "https://www.facebook.com" },
+            { title: "Messenger", meta: "فتح ماسنجر", url: "https://www.messenger.com" },
+            { title: "WhatsApp", meta: "فتح واتساب ويب", url: "https://web.whatsapp.com" }
         ];
 
         function renderLinks() {
