@@ -43,29 +43,6 @@
             max-width: 540px;
         }
 
-        /* شارة الحالة العلوية */
-        .pill-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 16px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 18px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-
         /* شاشة الترحيب الفخمة */
         #welcome-screen {
             min-height: 82vh;
@@ -104,8 +81,8 @@
 
         .mini-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 28px;
         }
 
@@ -113,18 +90,18 @@
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 12px 8px;
+            padding: 13px 10px;
         }
 
         .stat-label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--muted);
             margin-bottom: 4px;
         }
 
         .stat-val {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--accent);
         }
@@ -371,6 +348,106 @@
         .dl-btn:hover {
             filter: brightness(1.08);
         }
+
+        /* مربع التواصل الفخم في الأسفل */
+        .contact-box {
+            margin-top: 18px;
+            background: linear-gradient(145deg, var(--surface-soft), var(--surface));
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 20px;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .contact-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .contact-tag {
+            font-size: 0.75rem;
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .member-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 13px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .member-card:hover {
+            border-color: var(--accent);
+        }
+
+        .member-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 3px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .member-phone {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.4px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .copy-btn {
+            border: 1px solid var(--border);
+            background: var(--surface-soft);
+            color: var(--text);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -378,23 +455,12 @@
     <!-- شاشة الترحيب -->
     <section id="welcome-screen" class="container">
         <div class="hero-card">
-            <div style="display:flex; justify-content:center;">
-                <div class="pill-badge">
-                    <span class="dot"></span>
-                    <span>واجهة سريعة • تصميم متجدد • 20 ثيم</span>
-                </div>
-            </div>
-
             <h1 class="hero-title">مرحباً بكم في موقعنا</h1>
             <p class="hero-sub">
-                منصة أنيقة وسريعة تجمع أقسام الألعاب بروابط مباشرة والروابط السريعة في واجهة داكنة مريحة للعين مع إمكانية تغيير الألوان بضغطة واحدة.
+                منصة أنيقة وسريعة تجمع أقسام الألعاب بروابط مباشرة والروابط السريعة في واجهة داكنة مريحة للعين.
             </p>
 
             <div class="mini-stats">
-                <div class="stat-box">
-                    <span class="stat-label">الألوان</span>
-                    <span class="stat-val">20 ميكس</span>
-                </div>
                 <div class="stat-box">
                     <span class="stat-label">الأقسام</span>
                     <span class="stat-val">قسمين</span>
@@ -415,7 +481,7 @@
     <!-- المحتوى الرئيسي -->
     <main id="main-app" class="container">
         <div class="top-bar">
-            <div class="brand-mini">✦ لوحة الموقع</div>
+            <div class="brand-mini">لوحة الموقع</div>
             <div class="theme-controls">
                 <span id="theme-indicator" class="theme-chip">ثيم 1/20 • زمردي ليلي</span>
                 <button class="btn-secondary" onclick="cycleTheme()">🎨 تغيير الألوان</button>
@@ -490,6 +556,32 @@
                 <button class="btn-secondary" onclick="backToMain()">رجوع للقائمة</button>
             </div>
         </div>
+
+        <!-- مربع التواصل معنا في الأسفل -->
+        <footer class="contact-box">
+            <div class="contact-header">
+                <span class="contact-title">للتواصل معنا</span>
+                <span class="contact-tag">بيانات التواصل</span>
+            </div>
+
+            <div class="contact-grid">
+                <div class="member-card">
+                    <div>
+                        <div class="member-name">Abdelrahman Hatem</div>
+                        <div class="member-phone">01557391031</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyPhone('01557391031', this)">نسخ الرقم</button>
+                </div>
+
+                <div class="member-card">
+                    <div>
+                        <div class="member-name">Medhat Abdelbaky</div>
+                        <div class="member-phone">01060761957</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyPhone('01060761957', this)">نسخ الرقم</button>
+                </div>
+            </div>
+        </footer>
     </main>
 
     <script>
@@ -627,6 +719,15 @@
         function backToMain() {
             document.getElementById('sub-view').style.display = 'none';
             document.getElementById('main-panel').style.display = 'block';
+        }
+
+        function copyPhone(phone, btn) {
+            navigator.clipboard?.writeText(phone);
+            const oldText = btn.textContent;
+            btn.textContent = 'تم النسخ ✓';
+            setTimeout(() => {
+                btn.textContent = oldText;
+            }, 1400);
         }
 
         applyTheme(0);
