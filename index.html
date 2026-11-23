@@ -1,701 +1,811 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً بكم في موقعنا</title>
-    <style>
-        :root {
-            --bg-top: #071b14;
-            --bg-bottom: #06090c;
-            --surface: #0e141b;
-            --surface-soft: #131b24;
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #f3f6f9;
-            --muted: #94a3b8;
-            --accent: #10b981;
-            --accent-2: #06b6d4;
-            --accent-ink: #04130e;
-            --glow: rgba(16, 185, 129, 0.35);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdelrahman | عبدالرحمن</title>
+  <style>
+    :root {
+      --bg-main: #060b0a;
+      --bg-grad-1: rgba(16, 185, 129, 0.20);
+      --bg-grad-2: rgba(6, 182, 212, 0.14);
+      --surface: rgba(12, 20, 19, 0.92);
+      --surface-2: rgba(18, 30, 28, 0.92);
+      --border: rgba(52, 211, 153, 0.24);
+      --accent: #10b981;
+      --accent-2: #06b6d4;
+      --accent-glow: rgba(16, 185, 129, 0.35);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --btn-text: #04130e;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-            transition: background 0.35s ease, background-color 0.35s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            min-height: 100vh;
-            color: var(--text);
-            background: radial-gradient(circle at 50% -10%, var(--bg-top) 0%, var(--bg-bottom) 62%);
-            background-attachment: fixed;
-            padding: 24px 16px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, var(--bg-grad-1), transparent 44%),
+        radial-gradient(circle at 88% 28%, var(--bg-grad-2), transparent 46%),
+        var(--bg-main);
+      padding: 20px 14px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.35s ease, color 0.25s ease;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 540px;
-        }
+    body.panel-active {
+      align-items: flex-start;
+    }
 
-        /* شاشة الترحيب الفخمة */
-        #welcome-screen {
-            min-height: 82vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+    .app {
+      width: 100%;
+      max-width: 470px;
+    }
 
-        .hero-card {
-            width: 100%;
-            background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 36px 24px;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        }
+    /* الواجهة 1: شاشة الترحيب */
+    .welcome-card {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 20px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    }
 
-        .hero-title {
-            font-size: clamp(1.75rem, 6vw, 2.35rem);
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 14px;
-            background: linear-gradient(90deg, var(--text), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .welcome-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+      line-height: 1.35;
+    }
 
-        .hero-sub {
-            color: var(--muted);
-            font-size: 0.98rem;
-            line-height: 1.7;
-            margin-bottom: 26px;
-        }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
 
-        .mini-stats {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
+    .dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid var(--border);
+    }
 
-        .stat-box {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 12px;
-        }
+    .speed-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
 
-        .stat-label {
-            display: block;
-            font-size: 0.78rem;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
+    .speed-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
 
-        .stat-val {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
+    .speed-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
 
-        /* الأزرار */
-        .btn-primary {
-            width: 100%;
-            border: none;
-            border-radius: 14px;
-            padding: 14px 22px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            color: var(--accent-ink);
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            box-shadow: 0 10px 28px var(--glow);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+    .enter-btn {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--btn-text);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 26px var(--accent-glow);
+      cursor: pointer;
+      transition: transform 0.16s ease, filter 0.16s ease;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.06);
-        }
+    .enter-btn:hover {
+      filter: brightness(1.07);
+      transform: translateY(-2px);
+    }
 
-        .btn-secondary {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text);
-            background: var(--surface-soft);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
+    /* شريط لوحة الموقع و ميكس الألوان */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
 
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+    .topbar-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+    }
 
-        /* الصفحة الرئيسية */
-        #main-app {
-            display: none;
-        }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-        }
+    .pill-btn {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
 
-        .brand-mini {
-            font-weight: 800;
-            font-size: 1.15rem;
-            color: var(--accent);
-        }
+    .pill-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
 
-        .theme-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .theme-selector-wrap {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
 
-        .theme-chip {
-            font-size: 0.78rem;
-            color: var(--muted);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 7px 11px;
-            border-radius: 10px;
-        }
+    .theme-selector-wrap.open {
+      display: block;
+    }
 
-        .panel {
-            background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-        }
+    .theme-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
 
-        .panel-head {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
+    .theme-select {
+      flex: 1;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      outline: none;
+    }
 
-        .step-badge {
-            min-width: 34px;
-            height: 28px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: var(--accent-ink);
-            font-weight: 800;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2px;
-        }
+    /* الهيدر والشعار الدائري */
+    .hero {
+      text-align: center;
+      margin-bottom: 16px;
+    }
 
-        .panel-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-        }
+    .avatar-ring {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 12px;
+      padding: 3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2), #f43f5e, #f59e0b);
+      box-shadow: 0 0 26px var(--accent-glow);
+    }
 
-        .panel-desc {
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+    }
 
-        /* شريط التقدم المقسم */
-        .progress-track {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            margin-bottom: 18px;
-        }
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
 
-        .progress-seg {
-            height: 5px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-        }
+    .brand-title span {
+      color: var(--accent);
+      margin: 0 6px;
+    }
 
-        .progress-seg.active {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            box-shadow: 0 0 10px var(--glow);
-        }
+    .brand-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-        /* كارت الاختيار */
-        .choice-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
+    /* بطاقتا المعلومات */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        .choice-card.selected {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.045);
-            box-shadow: 0 0 0 1px var(--accent), 0 10px 24px rgba(0, 0, 0, 0.35);
-        }
+    .stat-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+    }
 
-        .choice-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .stat-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
 
-        .icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: var(--accent-ink);
-            font-weight: 800;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
+    .stat-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-        .choice-name {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
+    /* زر اللينكات السريعة في الواجهة 2 */
+    .quick-btn-box {
+      margin: 14px 0 18px;
+    }
 
-        .choice-meta {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
+    .quick-trigger-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 18px;
+      padding: 16px;
+      color: var(--text);
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
 
-        .selected-tag {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.88rem;
-        }
+    .quick-trigger-btn:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
 
-        /* عرض قائمة الروابط بعد الضغط على اختر */
-        #links-panel {
-            display: none;
-        }
+    .quick-trigger-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
 
-        .item-row {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
+    .quick-trigger-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--btn-text);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      padding: 7px 13px;
+      border-radius: 11px;
+      flex-shrink: 0;
+    }
 
-        .item-row:hover {
-            border-color: var(--accent);
-        }
+    /* الكروت والواجهات */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+    }
 
-        .open-btn {
-            padding: 9px 14px;
-            border-radius: 10px;
-            border: none;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: var(--accent-ink);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            white-space: nowrap;
-        }
+    .step-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
 
-        .open-btn:hover {
-            filter: brightness(1.08);
-        }
+    .step-badge {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
 
-        .actions-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
+    .step-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
 
-        .actions-row .btn-primary {
-            flex: 2;
-        }
+    .step-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-        .actions-row .btn-secondary {
-            flex: 1;
-        }
+    .progress-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
 
-        /* مربع التواصل الفخم في الأسفل */
-        .contact-box {
-            margin-top: 18px;
-            background: linear-gradient(145deg, var(--surface-soft), var(--surface));
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 20px;
-            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-            position: relative;
-            overflow: hidden;
-        }
+    .progress-bar span {
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-        .contact-box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        }
+    .progress-bar span.active {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
 
-        .contact-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
 
-        .contact-title {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
 
-        .contact-tag {
-            font-size: 0.75rem;
-            color: var(--muted);
-            padding: 4px 10px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-        }
+    .link-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
+    .link-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-        .member-card {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 13px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
+    .open-pill {
+      display: inline-block;
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: var(--btn-text);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 10px 16px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
 
-        .member-card:hover {
-            border-color: var(--accent);
-        }
+    .open-pill:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
 
-        .member-name {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--text);
-            margin-bottom: 3px;
-        }
+    .back-btn {
+      width: 100%;
+      margin-top: 14px;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-        .member-phone {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.4px;
-        }
+    /* قسم التواصل المباشر */
+    .contact-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
 
-        .copy-btn {
-            border: 1px solid var(--border);
-            background: var(--surface-soft);
-            color: var(--text);
-            border-radius: 10px;
-            padding: 8px 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+    .contact-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
 
-        .copy-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-    </style>
+    .contact-pill {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px 14px;
+      margin-bottom: 10px;
+    }
+
+    .contact-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .contact-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      direction: ltr;
+      text-align: right;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .copy-btn:hover,
+    .copy-btn.copied {
+      background: var(--accent);
+      color: var(--btn-text);
+      border-color: var(--accent);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-
-    <!-- شاشة الترحيب -->
-    <section id="welcome-screen" class="container">
-        <div class="hero-card">
-            <h1 class="hero-title">مرحباً بكم في موقعنا</h1>
-            <p class="hero-sub">
-                منصة أنيقة وسريعة بواجهة داكنة مريحة للعين.
-            </p>
-
-            <div class="mini-stats">
-                <div class="stat-box">
-                    <span class="stat-label">السرعة</span>
-                    <span class="stat-val">فوري</span>
-                </div>
-            </div>
-
-            <button class="btn-primary" onclick="openApp()">
-                <span>اضغط للدخول</span>
-                <span>←</span>
-            </button>
-        </div>
+  <div class="app">
+    <!-- الواجهة 1: الترحيب -->
+    <section id="welcomeScreen" class="welcome-card">
+      <h1 class="welcome-title">مرحبا بكم في موقعنا</h1>
+      <div class="dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="speed-box">
+        <div class="speed-label">السرعة</div>
+        <div class="speed-val">فوري</div>
+      </div>
+      <button type="button" id="enterBtn" class="enter-btn">اضغط للدخول ←</button>
     </section>
 
-    <!-- المحتوى الرئيسي -->
-    <main id="main-app" class="container">
-        <div class="top-bar">
-            <div class="brand-mini">لوحة الموقع</div>
-            <div class="theme-controls">
-                <span id="theme-indicator" class="theme-chip">ثيم 1/20 • زمردي ليلي</span>
-                <button class="btn-secondary" onclick="cycleTheme()">🎨 تغيير الألوان</button>
-            </div>
+    <!-- الواجهة 2: لوحة الموقع الرئيسية -->
+    <main id="dashboardScreen" class="hidden">
+      <div class="topbar">
+        <div class="topbar-title">لوحة الموقع</div>
+        <div class="topbar-actions">
+          <button type="button" id="cycleThemeBtn" class="pill-btn">🎨 تغيير الألوان</button>
+          <button type="button" id="openThemesMenuBtn" class="pill-btn">ثيم 1/30</button>
+        </div>
+      </div>
+
+      <div id="themeMenuBox" class="theme-selector-wrap">
+        <div class="theme-row">
+          <select id="themeSelect" class="theme-select" aria-label="اختر ميكس الألوان"></select>
+          <button type="button" id="randomThemeBtn" class="pill-btn">🎲 ميكس</button>
+        </div>
+      </div>
+
+      <header class="hero">
+        <div class="avatar-ring">
+          <div class="avatar-inner">A</div>
+        </div>
+        <div class="brand-title">Abdelrahman <span>|</span> عبدالرحمن</div>
+        <div class="brand-sub">لوحة الوصول السريع ومعلومات التواصل</div>
+      </header>
+
+      <section class="stats-grid" aria-label="مميزات الموقع">
+        <div class="stat-card">
+          <div class="stat-title">👑 عبدالرحمن</div>
+          <div class="stat-desc">الاسم الرسمي</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">⚡ سريع</div>
+          <div class="stat-desc">متوفر العديد من اللينكات هنا</div>
+        </div>
+      </section>
+
+      <div class="quick-btn-box">
+        <button type="button" id="openThirdScreenBtn" class="quick-trigger-btn">
+          <span class="quick-trigger-title">اللينكات السريعة</span>
+          <span class="quick-trigger-tag">اضغط هنا</span>
+        </button>
+      </div>
+
+      <section class="panel">
+        <div class="contact-head">
+          <div class="contact-title">للتواصل معنا</div>
+          <div class="contact-pill">بيانات التواصل</div>
         </div>
 
-        <!-- خطوة الاختيار: اختيار روابط سريعة والضغط على اختر -->
-        <div id="selector-panel" class="panel">
-            <div class="panel-head">
-                <span class="step-badge">01</span>
-                <div>
-                    <h2 class="panel-title">اختر من القائمة</h2>
-                    <p class="panel-desc">حدد الخيار ثم اضغط على زر اختر للدخول</p>
-                </div>
-            </div>
-
-            <div class="progress-track">
-                <div class="progress-seg active"></div>
-                <div class="progress-seg active"></div>
-                <div class="progress-seg"></div>
-                <div class="progress-seg"></div>
-            </div>
-
-            <div id="quick-links-card" class="choice-card selected" onclick="toggleQuickSelect()">
-                <div class="choice-left">
-                    <div class="icon-box">⚡</div>
-                    <div>
-                        <div class="choice-name">روابط سريعة</div>
-                        <div class="choice-meta">قائمة الروابط المباشرة والوصول السريع</div>
-                    </div>
-                </div>
-                <span id="select-status" class="selected-tag">محدد</span>
-            </div>
-
-            <div class="actions-row">
-                <button class="btn-primary" onclick="confirmSelection()">اختر ←</button>
-                <button class="btn-secondary" onclick="backToWelcome()">الترحيب</button>
-            </div>
+        <div class="contact-card">
+          <div>
+            <div class="contact-name">Abdelrahman Hatem</div>
+            <div class="contact-num">01557391031</div>
+          </div>
+          <button type="button" class="copy-btn" data-phone="01557391031">نسخ الرقم</button>
         </div>
 
-        <!-- عرض الروابط السريعة بعد الضغط على اختر -->
-        <div id="links-panel" class="panel">
-            <div class="panel-head">
-                <span class="step-badge">02</span>
-                <div>
-                    <h2 class="panel-title">روابط سريعة</h2>
-                    <p class="panel-desc">وصول سريع ومباشر إلى المواقع المفضلة</p>
-                </div>
-            </div>
-
-            <div class="progress-track">
-                <div class="progress-seg active"></div>
-                <div class="progress-seg active"></div>
-                <div class="progress-seg active"></div>
-                <div class="progress-seg active"></div>
-            </div>
-
-            <div id="links-list"></div>
-
-            <div class="actions-row">
-                <button class="btn-secondary" onclick="backToSelector()">رجوع للاختيار</button>
-            </div>
+        <div class="contact-card">
+          <div>
+            <div class="contact-name">Medhat Abdelbaky</div>
+            <div class="contact-num">01060761957</div>
+          </div>
+          <button type="button" class="copy-btn" data-phone="01060761957">نسخ الرقم</button>
         </div>
-
-        <!-- مربع التواصل معنا في الأسفل (عدّل النصوص والأرقام هنا كما تحب) -->
-        <footer class="contact-box">
-            <div class="contact-header">
-                <span class="contact-title">للتواصل معنا</span>
-                <span class="contact-tag">بيانات التواصل</span>
-            </div>
-
-            <div class="contact-grid">
-                <div class="member-card">
-                    <div>
-                        <div class="member-name">اكتب الاسم هنا</div>
-                        <div class="member-phone">اكتب الرقم هنا</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyPhone('اكتب الرقم هنا', this)">نسخ الرقم</button>
-                </div>
-
-                <div class="member-card">
-                    <div>
-                        <div class="member-name">اكتب الاسم هنا</div>
-                        <div class="member-phone">اكتب الرقم هنا</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyPhone('اكتب الرقم هنا', this)">نسخ الرقم</button>
-                </div>
-            </div>
-        </footer>
+      </section>
     </main>
 
-    <script>
-        // 20 ميكس ألوان متنوعة وجذابة
-        const themes = [
-            { name: "زمردي ليلي", bgTop: "#071b14", bgBot: "#06090c", surface: "#0e141b", soft: "#131b24", accent: "#10b981", accent2: "#06b6d4", ink: "#04130e", glow: "rgba(16, 185, 129, 0.35)" },
-            { name: "نيون سيبراني", bgTop: "#1a0b2e", bgBot: "#07060d", surface: "#120f24", soft: "#1a1633", accent: "#e879f9", accent2: "#38bdf8", ink: "#1b0422", glow: "rgba(232, 121, 249, 0.35)" },
-            { name: "غروب ذهبي", bgTop: "#271306", bgBot: "#090706", surface: "#17110d", soft: "#221812", accent: "#f59e0b", accent2: "#ef4444", ink: "#1f1202", glow: "rgba(245, 158, 11, 0.35)" },
-            { name: "محيط أزرق", bgTop: "#061d30", bgBot: "#05080d", surface: "#0c1521", soft: "#121f30", accent: "#38bdf8", accent2: "#2dd4bf", ink: "#031521", glow: "rgba(56, 189, 248, 0.35)" },
-            { name: "قرمزي ملكي", bgTop: "#290916", bgBot: "#090507", surface: "#190d13", soft: "#24121b", accent: "#fb7185", accent2: "#f97316", ink: "#24040e", glow: "rgba(251, 113, 133, 0.35)" },
-            { name: "ليموني داكن", bgTop: "#172407", bgBot: "#070805", surface: "#11160c", soft: "#192111", accent: "#a3e635", accent2: "#10b981", ink: "#142102", glow: "rgba(163, 230, 53, 0.35)" },
-            { name: "بنفسجي عميق", bgTop: "#171036", bgBot: "#06050c", surface: "#100e22", soft: "#181533", accent: "#a78bfa", accent2: "#f472b6", ink: "#140b2e", glow: "rgba(167, 139, 250, 0.35)" },
-            { name: "مرجاني دافئ", bgTop: "#2b100b", bgBot: "#080605", surface: "#19100e", soft: "#241613", accent: "#ff6b6b", accent2: "#ffd166", ink: "#240704", glow: "rgba(255, 107, 107, 0.35)" },
-            { name: "تركواز جليدي", bgTop: "#052424", bgBot: "#050808", surface: "#0b1617", soft: "#102122", accent: "#2dd4bf", accent2: "#60a5fa", ink: "#021c1a", glow: "rgba(45, 212, 191, 0.35)" },
-            { name: "عنبر ونحاس", bgTop: "#241407", bgBot: "#080605", surface: "#17110c", soft: "#221811", accent: "#fb923c", accent2: "#facc15", ink: "#210e02", glow: "rgba(251, 146, 60, 0.35)" },
-            { name: "وردي نيون", bgTop: "#2b0b22", bgBot: "#090508", surface: "#190d16", soft: "#241220", accent: "#f472b6", accent2: "#c084fc", ink: "#24041a", glow: "rgba(244, 114, 182, 0.35)" },
-            { name: "نعناعي حديث", bgTop: "#062419", bgBot: "#050807", surface: "#0c1713", soft: "#11221c", accent: "#34d399", accent2: "#a3e635", ink: "#031d13", glow: "rgba(52, 211, 153, 0.35)" },
-            { name: "أزرق كهربائي", bgTop: "#081436", bgBot: "#05060c", surface: "#0d1224", soft: "#131a33", accent: "#60a5fa", accent2: "#818cf8", ink: "#05102b", glow: "rgba(96, 165, 250, 0.35)" },
-            { name: "ذهبي فرعوني", bgTop: "#241d06", bgBot: "#080704", surface: "#17140b", soft: "#221d10", accent: "#eab308", accent2: "#f59e0b", ink: "#1f1802", glow: "rgba(234, 179, 8, 0.35)" },
-            { name: "أحمر بركاني", bgTop: "#2b0808", bgBot: "#090505", surface: "#190c0c", soft: "#241111", accent: "#ef4444", accent2: "#fb923c", ink: "#240303", glow: "rgba(239, 68, 68, 0.35)" },
-            { name: "سماوي مشرق", bgTop: "#06212e", bgBot: "#05080b", surface: "#0c161d", soft: "#11202a", accent: "#22d3ee", accent2: "#38bdf8", ink: "#031a24", glow: "rgba(34, 211, 238, 0.35)" },
-            { name: "أرجواني ملكي", bgTop: "#1f0930", bgBot: "#07050b", surface: "#140c21", soft: "#1d1130", accent: "#c084fc", accent2: "#e879f9", ink: "#190529", glow: "rgba(192, 132, 252, 0.35)" },
-            { name: "أخضر غابات", bgTop: "#092111", bgBot: "#050806", surface: "#0e1711", soft: "#142118", accent: "#4ade80", accent2: "#2dd4bf", ink: "#041c0c", glow: "rgba(74, 222, 128, 0.35)" },
-            { name: "برتقالي غروب", bgTop: "#291206", bgBot: "#090604", surface: "#18100c", soft: "#231711", accent: "#f97316", accent2: "#fb7185", ink: "#210c02", glow: "rgba(249, 115, 22, 0.35)" },
-            { name: "فضي وسيان", bgTop: "#0b1e26", bgBot: "#06080a", surface: "#10161c", soft: "#172028", accent: "#67e8f9", accent2: "#cbd5e1", ink: "#041820", glow: "rgba(103, 232, 249, 0.35)" }
-        ];
+    <!-- الواجهة 3: شاشة اللينكات السريعة -->
+    <section id="thirdScreen" class="panel hidden">
+      <div class="step-head">
+        <div>
+          <div class="step-title">اللينكات السريعة</div>
+          <div class="step-sub">متوفر العديد من اللينكات هنا</div>
+        </div>
+        <div class="step-badge">03</div>
+      </div>
 
-        let themeIndex = 0;
-        let isQuickSelected = true;
+      <div class="progress-bar">
+        <span class="active"></span>
+        <span class="active"></span>
+        <span class="active"></span>
+        <span class="active"></span>
+      </div>
 
-        const linksData = [
-            { title: "YouTube", meta: "فتح موقع يوتيوب", url: "https://www.youtube.com" },
-            { title: "TikTok", meta: "فتح موقع تيك توك", url: "https://www.tiktok.com" },
-            { title: "Google", meta: "بحث جوجل السريع", url: "https://www.google.com" },
-            { title: "Gemini", meta: "فتح مساعد جيميناي", url: "https://gemini.google.com" },
-            { title: "ChatGPT", meta: "فتح شات جي بي تي", url: "https://chatgpt.com" },
-            { title: "Instagram", meta: "فتح موقع انستجرام", url: "https://www.instagram.com" },
-            { title: "Telegram", meta: "فتح تليجرام ويب", url: "https://t.me" },
-            { title: "Facebook", meta: "فتح موقع فيسبوك", url: "https://www.facebook.com" },
-            { title: "Messenger", meta: "فتح ماسنجر", url: "https://www.messenger.com" },
-            { title: "WhatsApp", meta: "فتح واتساب ويب", url: "https://web.whatsapp.com" }
-        ];
+      <div class="links-stack">
+        <div class="link-row">
+          <div>
+            <div class="link-title">تيك توك</div>
+            <div class="link-sub">TikTok</div>
+          </div>
+          <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
 
-        function renderLinks() {
-            const listEl = document.getElementById('links-list');
-            listEl.innerHTML = '';
-            linksData.forEach(item => {
-                listEl.innerHTML += `
-                    <div class="item-row">
-                        <div>
-                            <div class="choice-name">${item.title}</div>
-                            <div class="choice-meta">${item.meta}</div>
-                        </div>
-                        <a class="open-btn" href="${item.url}" target="_blank" rel="noopener">فتح الرابط</a>
-                    </div>
-                `;
-            });
+        <div class="link-row">
+          <div>
+            <div class="link-title">واتس اب</div>
+            <div class="link-sub">WhatsApp</div>
+          </div>
+          <a class="open-pill" href="https://api.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">يوتيوب</div>
+            <div class="link-sub">YouTube</div>
+          </div>
+          <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">جوجل</div>
+            <div class="link-sub">Google</div>
+          </div>
+          <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">انستاجرام</div>
+            <div class="link-sub">Instagram</div>
+          </div>
+          <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">جيميناى</div>
+            <div class="link-sub">Gemini</div>
+          </div>
+          <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+      </div>
+
+      <button type="button" id="backFromThirdBtn" class="back-btn">رجوع</button>
+    </section>
+  </div>
+
+  <script>
+    const THEMES_30 = [
+      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(6, 182, 212, 0.16)", s1: "rgba(12, 20, 19, 0.92)", s2: "rgba(18, 30, 28, 0.92)", b: "rgba(52, 211, 153, 0.25)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.35)", bt: "#04130e" },
+      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.24)", g2: "rgba(139, 92, 246, 0.18)", s1: "rgba(20, 14, 30, 0.92)", s2: "rgba(30, 21, 44, 0.92)", b: "rgba(244, 114, 182, 0.26)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.36)", bt: "#190612" },
+      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.22)", g2: "rgba(244, 63, 94, 0.18)", s1: "rgba(13, 18, 34, 0.92)", s2: "rgba(20, 27, 48, 0.92)", b: "rgba(56, 189, 248, 0.26)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.35)", bt: "#05121d" },
+      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.22)", g2: "rgba(234, 88, 12, 0.16)", s1: "rgba(24, 19, 10, 0.92)", s2: "rgba(34, 27, 14, 0.92)", b: "rgba(251, 191, 36, 0.25)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.34)", bt: "#1d1202" },
+      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.24)", g2: "rgba(217, 70, 239, 0.16)", s1: "rgba(18, 12, 30, 0.92)", s2: "rgba(27, 19, 44, 0.92)", b: "rgba(192, 132, 252, 0.26)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.36)", bt: "#150624" },
+      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.22)", g2: "rgba(45, 212, 191, 0.16)", s1: "rgba(10, 21, 34, 0.92)", s2: "rgba(15, 31, 48, 0.92)", b: "rgba(56, 189, 248, 0.24)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.34)", bt: "#041622" },
+      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.22)", g2: "rgba(249, 115, 22, 0.16)", s1: "rgba(28, 11, 14, 0.92)", s2: "rgba(38, 16, 20, 0.92)", b: "rgba(248, 113, 113, 0.25)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.35)", bt: "#210508" },
+      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.22)", g2: "rgba(16, 185, 129, 0.16)", s1: "rgba(18, 24, 10, 0.92)", s2: "rgba(26, 34, 15, 0.92)", b: "rgba(163, 230, 53, 0.25)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.34)", bt: "#121d03" },
+      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.22)", g2: "rgba(251, 191, 36, 0.16)", s1: "rgba(27, 13, 17, 0.92)", s2: "rgba(37, 19, 24, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.34)", bt: "#22060c" },
+      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.22)", g2: "rgba(59, 130, 246, 0.16)", s1: "rgba(10, 23, 21, 0.92)", s2: "rgba(15, 33, 30, 0.92)", b: "rgba(45, 212, 191, 0.25)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.34)", bt: "#041916" },
+      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.24)", g2: "rgba(236, 72, 153, 0.16)", s1: "rgba(14, 14, 34, 0.92)", s2: "rgba(21, 21, 48, 0.92)", b: "rgba(129, 140, 248, 0.26)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.35)", bt: "#0b0b24" },
+      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.24)", g2: "rgba(250, 204, 21, 0.15)", s1: "rgba(28, 15, 8, 0.92)", s2: "rgba(38, 22, 12, 0.92)", b: "rgba(251, 146, 60, 0.26)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.36)", bt: "#210d02" },
+      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.20)", g2: "rgba(125, 211, 252, 0.16)", s1: "rgba(12, 24, 19, 0.92)", s2: "rgba(18, 34, 28, 0.92)", b: "rgba(110, 231, 183, 0.24)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.33)", bt: "#051911" },
+      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.23)", g2: "rgba(244, 63, 94, 0.17)", s1: "rgba(28, 11, 25, 0.92)", s2: "rgba(39, 16, 35, 0.92)", b: "rgba(232, 121, 249, 0.26)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.35)", bt: "#21051e" },
+      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.22)", g2: "rgba(167, 139, 250, 0.16)", s1: "rgba(12, 22, 32, 0.92)", s2: "rgba(18, 31, 45, 0.92)", b: "rgba(125, 211, 252, 0.25)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.34)", bt: "#041420" },
+      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.22)", g2: "rgba(99, 102, 241, 0.17)", s1: "rgba(22, 11, 25, 0.92)", s2: "rgba(31, 16, 35, 0.92)", b: "rgba(217, 70, 239, 0.25)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.35)", bt: "#1c0420" },
+      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.20)", g2: "rgba(249, 115, 22, 0.16)", s1: "rgba(25, 19, 10, 0.92)", s2: "rgba(35, 27, 15, 0.92)", b: "rgba(250, 204, 21, 0.24)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.33)", bt: "#1c1402" },
+      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.24)", g2: "rgba(16, 185, 129, 0.16)", s1: "rgba(10, 22, 27, 0.92)", s2: "rgba(15, 32, 39, 0.92)", b: "rgba(34, 211, 238, 0.26)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.36)", bt: "#03181e" },
+      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.21)", g2: "rgba(192, 132, 252, 0.16)", s1: "rgba(25, 14, 22, 0.92)", s2: "rgba(35, 20, 31, 0.92)", b: "rgba(244, 114, 182, 0.25)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.34)", bt: "#200718" },
+      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.22)", g2: "rgba(163, 230, 53, 0.15)", s1: "rgba(11, 22, 15, 0.92)", s2: "rgba(17, 32, 22, 0.92)", b: "rgba(74, 222, 128, 0.25)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.35)", bt: "#04190c" },
+      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.24)", g2: "rgba(168, 85, 247, 0.16)", s1: "rgba(12, 17, 34, 0.92)", s2: "rgba(18, 25, 48, 0.92)", b: "rgba(96, 165, 250, 0.26)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.36)", bt: "#061126" },
+      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.22)", g2: "rgba(245, 158, 11, 0.15)", s1: "rgba(26, 11, 18, 0.92)", s2: "rgba(37, 16, 26, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.35)", bt: "#20040d" },
+      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.23)", g2: "rgba(34, 211, 238, 0.15)", s1: "rgba(16, 24, 11, 0.92)", s2: "rgba(24, 34, 16, 0.92)", b: "rgba(190, 242, 100, 0.25)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.34)", bt: "#131e03" },
+      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.24)", g2: "rgba(56, 189, 248, 0.16)", s1: "rgba(17, 12, 33, 0.92)", s2: "rgba(25, 18, 46, 0.92)", b: "rgba(167, 139, 250, 0.26)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.36)", bt: "#130729" },
+      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.22)", g2: "rgba(236, 72, 153, 0.16)", s1: "rgba(28, 15, 12, 0.92)", s2: "rgba(38, 21, 17, 0.92)", b: "rgba(253, 186, 116, 0.25)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.34)", bt: "#210e05" },
+      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.22)", g2: "rgba(99, 102, 241, 0.16)", s1: "rgba(10, 21, 26, 0.92)", s2: "rgba(15, 31, 37, 0.92)", b: "rgba(34, 211, 238, 0.25)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.35)", bt: "#04181e" },
+      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.23)", g2: "rgba(168, 85, 247, 0.15)", s1: "rgba(27, 11, 19, 0.92)", s2: "rgba(38, 16, 27, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.35)", bt: "#22050d" },
+      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.21)", g2: "rgba(20, 184, 166, 0.15)", s1: "rgba(20, 24, 13, 0.92)", s2: "rgba(29, 34, 19, 0.92)", b: "rgba(132, 204, 22, 0.24)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.33)", bt: "#101b03" },
+      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.24)", g2: "rgba(34, 211, 238, 0.16)", s1: "rgba(11, 17, 34, 0.92)", s2: "rgba(16, 25, 48, 0.92)", b: "rgba(59, 130, 246, 0.26)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.36)", bt: "#061129" },
+      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.20)", g2: "rgba(236, 72, 153, 0.20)", s1: "rgba(14, 19, 31, 0.92)", s2: "rgba(21, 28, 44, 0.92)", b: "rgba(52, 211, 153, 0.26)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.35)", bt: "#04140f" }
+    ];
+
+    const root = document.documentElement;
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const dashboardScreen = document.getElementById("dashboardScreen");
+    const thirdScreen = document.getElementById("thirdScreen");
+
+    const enterBtn = document.getElementById("enterBtn");
+    const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
+    const backFromThirdBtn = document.getElementById("backFromThirdBtn");
+
+    const cycleThemeBtn = document.getElementById("cycleThemeBtn");
+    const openThemesMenuBtn = document.getElementById("openThemesMenuBtn");
+    const themeMenuBox = document.getElementById("themeMenuBox");
+    const themeSelect = document.getElementById("themeSelect");
+    const randomThemeBtn = document.getElementById("randomThemeBtn");
+
+    let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
+    if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
+      currentThemeIndex = 0;
+    }
+
+    THEMES_30.forEach((t, idx) => {
+      const opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = `${idx + 1}/30 — ${t.name}`;
+      themeSelect.appendChild(opt);
+    });
+
+    function applyTheme(index) {
+      currentThemeIndex = ((index % THEMES_30.length) + THEMES_30.length) % THEMES_30.length;
+      const t = THEMES_30[currentThemeIndex];
+      root.style.setProperty("--bg-main", t.bg);
+      root.style.setProperty("--bg-grad-1", t.g1);
+      root.style.setProperty("--bg-grad-2", t.g2);
+      root.style.setProperty("--surface", t.s1);
+      root.style.setProperty("--surface-2", t.s2);
+      root.style.setProperty("--border", t.b);
+      root.style.setProperty("--accent", t.a1);
+      root.style.setProperty("--accent-2", t.a2);
+      root.style.setProperty("--accent-glow", t.glow);
+      root.style.setProperty("--btn-text", t.bt);
+
+      themeSelect.value = currentThemeIndex;
+      openThemesMenuBtn.textContent = `ثيم ${currentThemeIndex + 1}/30`;
+      localStorage.setItem("boodyPortalThemeIdx", String(currentThemeIndex));
+    }
+
+    applyTheme(currentThemeIndex);
+
+    enterBtn.addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
+      document.body.classList.add("panel-active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    openThirdScreenBtn.addEventListener("click", () => {
+      dashboardScreen.classList.add("hidden");
+      thirdScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    backFromThirdBtn.addEventListener("click", () => {
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    cycleThemeBtn.addEventListener("click", () => {
+      applyTheme(currentThemeIndex + 1);
+    });
+
+    openThemesMenuBtn.addEventListener("click", () => {
+      themeMenuBox.classList.toggle("open");
+    });
+
+    themeSelect.addEventListener("change", (e) => {
+      applyTheme(Number(e.target.value));
+    });
+
+    randomThemeBtn.addEventListener("click", () => {
+      if (THEMES_30.length <= 1) return;
+      let next = Math.floor(Math.random() * THEMES_30.length);
+      if (next === currentThemeIndex) next = (next + 1) % THEMES_30.length;
+      applyTheme(next);
+    });
+
+    document.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const phone = btn.getAttribute("data-phone") || "";
+        try {
+          await navigator.clipboard.writeText(phone);
+        } catch (_) {
+          const temp = document.createElement("textarea");
+          temp.value = phone;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
         }
-
-        function applyTheme(idx) {
-            const t = themes[idx];
-            const r = document.documentElement.style;
-            r.setProperty('--bg-top', t.bgTop);
-            r.setProperty('--bg-bottom', t.bgBot);
-            r.setProperty('--surface', t.surface);
-            r.setProperty('--surface-soft', t.soft);
-            r.setProperty('--accent', t.accent);
-            r.setProperty('--accent-2', t.accent2);
-            r.setProperty('--accent-ink', t.ink);
-            r.setProperty('--glow', t.glow);
-            document.getElementById('theme-indicator').textContent = `ثيم ${idx + 1}/20 • ${t.name}`;
-        }
-
-        function cycleTheme() {
-            themeIndex = (themeIndex + 1) % themes.length;
-            applyTheme(themeIndex);
-        }
-
-        function openApp() {
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('main-app').style.display = 'block';
-            backToSelector();
-        }
-
-        function backToWelcome() {
-            document.getElementById('main-app').style.display = 'none';
-            document.getElementById('welcome-screen').style.display = 'flex';
-        }
-
-        function toggleQuickSelect() {
-            isQuickSelected = !isQuickSelected;
-            const card = document.getElementById('quick-links-card');
-            const status = document.getElementById('select-status');
-            if (isQuickSelected) {
-                card.classList.add('selected');
-                status.textContent = 'محدد';
-                status.style.color = 'var(--accent)';
-            } else {
-                card.classList.remove('selected');
-                status.textContent = 'غير محدد';
-                status.style.color = 'var(--muted)';
-            }
-        }
-
-        function confirmSelection() {
-            if (!isQuickSelected) {
-                toggleQuickSelect();
-            }
-            document.getElementById('selector-panel').style.display = 'none';
-            document.getElementById('links-panel').style.display = 'block';
-        }
-
-        function backToSelector() {
-            document.getElementById('links-panel').style.display = 'none';
-            document.getElementById('selector-panel').style.display = 'block';
-        }
-
-        function copyPhone(phone, btn) {
-            navigator.clipboard?.writeText(phone);
-            const oldText = btn.textContent;
-            btn.textContent = 'تم النسخ ✓';
-            setTimeout(() => {
-                btn.textContent = oldText;
-            }, 1400);
-        }
-
-        renderLinks();
-        applyTheme(0);
-    </script>
+        const oldText = btn.textContent;
+        btn.textContent = "تم النسخ ✓";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = oldText;
+          btn.classList.remove("copied");
+        }, 1600);
+      });
+    });
+  </script>
 </body>
 </html>
